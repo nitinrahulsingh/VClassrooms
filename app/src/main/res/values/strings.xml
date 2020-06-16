@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">VClassrooms</string>
+    <string name="no_internet">Internet is not available , Please check your network and try again</string>
+    <string name="Alert">Alert</string>
+    <string name="search">Search</string>
+    <string name="close">Close</string>
+    <string name="Permission_Denied">Permission Denied</string>
+    <string name="Please_give_permission_for_app_functionality">Please give permission for app functionality</string>
+    <string name="If_you_reject_permission_you_can_not_use_this_service">If you reject permission,you can not use this service</string>
+    <string name="Please_turn_on_permissions_at">Please turn on permissions at [Setting] > [Permission]</string>
+    <string name="settings">setting</string>
 </resources>
