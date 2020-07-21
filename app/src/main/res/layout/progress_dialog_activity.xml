@@ -17,7 +17,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:src="@android:color/transparent"
-        android:visibility="visible"
+        android:visibility="gone"
         app:civ_border_color="@color/colorPrimary"
         app:civ_border_width="4dp" />
 

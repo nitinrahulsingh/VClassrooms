@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgStudent"
+        android:layout_width="@dimen/_70sdp"
+        android:background="@drawable/profile"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/_2sdp"
+        android:layout_marginBottom="-35dp"
+        android:elevation="30dp"/>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relaParent"
+    app:elevation="@dimen/_9sdp"
+    app:cardCornerRadius="10dp"
+    app:cardMaxElevation="@dimen/_3sdp"
+    android:orientation="horizontal"
+    android:layout_weight="2">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:weightSum="3">
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/proxima_nova"
+                android:gravity="center"
+                android:text="tetet ghdgdgd"
+                android:textAlignment="center"
+                android:textColor="@color/btn_color"
+                android:textSize="@dimen/_14sdp"
+                android:maxLines="2"/>
+            <TextView
+                android:id="@+id/txtMob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/proxima_nova"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="tetet ghdgdgd"
+                android:drawableLeft="@drawable/phone"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="2dp"
+                android:textColor="@color/gray_1100"
+                android:textSize="@dimen/_10sdp"
+                android:maxLines="2"/>
+           <!-- <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                    android:src="@drawable/at"
+                    android:visibility="gone"
+                    android:layout_gravity="center"/>-->
+
+            <TextView
+                android:id="@+id/txtMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/proxima_nova"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="tetet gh dgdgd"
+                android:drawableLeft="@drawable/email"
+                android:layout_marginTop="2dp"
+                android:drawablePadding="2dp"
+                android:textColor="@color/gray_1100"
+                android:textSize="@dimen/_10sdp"
+                android:maxLines="2"/>
+            <TextView
+                android:id="@+id/tvDaily_Schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/proxima_nova"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Schedule"
+                android:layout_marginTop="2dp"
+                android:drawablePadding="2dp"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_10sdp"
+                android:maxLines="2"/>
+          <!--  </LinearLayout>-->
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+</LinearLayout>

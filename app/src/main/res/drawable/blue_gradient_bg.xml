@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle" >
+            <size android:height="100dp"/>
+        </shape>
+    </item>
+    <item
+        android:bottom="0dp"
+        android:left="-350dp"
+        android:right="-350dp"
+        android:top="-250dp"><!--Change this to handle curve-->
+        <shape android:shape="oval">
+            <gradient
+                android:angle="270"
+                android:startColor="#239db4"
+                android:centerColor="#239db4"
+                android:endColor="#1a3e8a" />
+        </shape>
+    </item>
+</layer-list>

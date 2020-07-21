@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_100"
+    android:orientation="vertical">
+
+    <com.vclassrooms.CollapseCalender.widget.CollapsibleCalendar
+        android:id="@+id/collapsibleCalendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:buttonLeft_drawableTintColor="@android:color/black"
+        app:buttonRight_drawableTintColor="@android:color/black"
+        app:eventColor="@android:color/black"
+        app:expandIconColor="@android:color/black"
+        app:primaryColor="@color/white"
+        app:selectedItem_background="@drawable/circle_white_solid_background"
+        app:selectedItem_textColor="@color/black"
+        app:textColor="@android:color/black"
+        app:todayItem_background="@drawable/circle_white_stroke_background"
+        app:todayItem_textColor="@android:color/black" />
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewPager">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/green"
+                    android:gravity="center"
+                    android:text="Present" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/orange"
+                    android:gravity="center"
+                    android:text="Absent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/yellow"
+                    android:gravity="center"
+                    android:text="Holiday" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/seekBar1"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:visibility="visible" />
+
+    <TextView
+        android:drawableTop="@drawable/noresultfound"
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/no_data"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/bottom_sheet_bg"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/minimize_relative"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:background="@drawable/down_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:padding="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/heading_tv"
+                        android:layout_width="0dp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="Heading"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_14sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:background="@color/gray_400"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <LinearLayout
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_15sdp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+<LinearLayout
+    android:id="@+id/linear_leavedate"
+    android:weightSum="2"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_weight="1"
+        android:id="@+id/linearstartdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAutomaticOtpDetect"
+        android:layout_margin="@dimen/_8sdp"
+        android:background="@drawable/rounded_gray_border"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/starttxt_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="@color/gray_400"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:fontFamily="@font/muli_regular"
+            android:hint="Start Date"
+            android:inputType="text"
+            android:padding="@dimen/_5sdp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray_1100"
+            android:textColorHighlight="@color/gray_1100"
+            android:textCursorDrawable="@color/gray_900"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <ImageView
+            android:layout_gravity="center"
+            android:paddingEnd="@dimen/_5sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/calender_gray" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:id="@+id/linearenddate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAutomaticOtpDetect"
+        android:layout_margin="@dimen/_8sdp"
+        android:background="@drawable/rounded_gray_border"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/endtxt_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="@color/gray_400"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:fontFamily="@font/muli_regular"
+            android:hint="End Date"
+            android:inputType="text"
+            android:padding="@dimen/_5sdp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray_1100"
+            android:textColorHighlight="@color/gray_1100"
+            android:textCursorDrawable="@color/gray_900"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <ImageView
+            android:layout_gravity="center"
+            android:paddingEnd="@dimen/_5sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/calender_gray" />
+
+    </LinearLayout>
+</LinearLayout>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:cardElevation="0dp"
+                        >
+                        <LinearLayout
+                            android:background="@drawable/rounded_gray_border"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtAutomaticOtpDetect"
+                            android:orientation="horizontal"
+                            android:layout_margin="@dimen/_8sdp">
+
+                            <EditText
+                                android:focusableInTouchMode="false"
+                                android:editable="false"
+                                android:id="@+id/et_noOfDays"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:maxLength="50"
+                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '"
+                                android:backgroundTint="@color/gray_400"
+                                android:cursorVisible="true"
+                                android:focusable="false"
+                                android:fontFamily="@font/muli_regular"
+                                android:hint="No Of  Days"
+                                android:inputType="text"
+                                android:padding="@dimen/_5sdp"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/gray_1100"
+                                android:textColorHighlight="@color/gray_1100"
+                                android:textSize="@dimen/_12sdp" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/leave_type_cardview"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        app:cardElevation="0dp"
+                        >
+
+                        <com.vclassrooms.SearchableSpinner.SearchableSpinner
+                            android:visibility="visible"
+                            android:id="@+id/spinner_leaveType"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@drawable/bg_spinner"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:inputType="text"
+                            android:padding="@dimen/_6sdp"
+                            android:textSize="@dimen/_12sdp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:background="@drawable/rounded_gray_border"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtAutomaticOtpDetect"
+                        android:orientation="horizontal"
+                        android:layout_margin="@dimen/_8sdp">
+
+                        <EditText
+                            android:id="@+id/et_reason"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:maxLength="50"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '"
+                            android:backgroundTint="@color/gray_400"
+                            android:cursorVisible="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/muli_regular"
+                            android:hint="Reason For Leave"
+                            android:inputType="text"
+                            android:padding="@dimen/_5sdp"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/gray_1100"
+                            android:textColorHighlight="@color/gray_1100"
+                            android:textSize="@dimen/_12sdp" />
+
+
+                    </LinearLayout>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:cardElevation="0dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_8sdp"
+                            android:background="@drawable/rounded_gray_border"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/et_detail"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_gravity="top"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:backgroundTint="@color/gray_400"
+                                android:cursorVisible="true"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:focusable="true"
+                                android:fontFamily="@font/muli_regular"
+                                android:gravity="top"
+                                android:hint="Detail"
+                                android:imeOptions="actionNone"
+                                android:inputType="textMultiLine"
+                                android:maxLength="200"
+                                android:maxLines="6"
+                                android:padding="@dimen/_5sdp"
+                                android:textColor="@color/black"
+                                android:textColorHighlight="@color/gray_1100"
+                                android:textSize="@dimen/_12sdp" />
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/button_selector_round_color"
+                        android:fontFamily="@font/proxima_nova"
+                        android:text="Submit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

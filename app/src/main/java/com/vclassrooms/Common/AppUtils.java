@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -36,11 +37,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textfield.TextInputLayout;
 import com.vclassrooms.R;
 
@@ -68,6 +76,7 @@ public class AppUtils {
      * @param activity
      */
     @SuppressWarnings("ConstantConditions")
+
     public  void hideSoftKeyboard(Activity activity) {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -77,124 +86,25 @@ public class AppUtils {
         }
     }
 
-    /**
-     * set String Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param value          String value
-     * @param preferenceKey  Key name of the Preference
-     */
+
+
     public  void setStringPrefrences(Context context, String preferenceName, String value, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(preferenceName, value);
-        editor.apply();
+        SharedPreferences sp = context.getSharedPreferences(preferenceName, 0);
+        sp.edit().putString(preferenceKey, value).apply();
     }
 
-    /**
-     * get String Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param preferenceKey  Key name of the Preference
-     * @return value of saved preference. If value is not set, return null
-     */
     public  String getStringPrefrences(Context context, String preferenceName, String preferenceKey) {
 
         String stringValue = null;
         try {
-            sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-            stringValue = sharedPreferences.getString(preferenceName, null);
+            SharedPreferences sp = context.getSharedPreferences(preferenceName, 0);
+            return sp.getString(preferenceKey, "");
         } catch (NullPointerException e) {
 
         }
         return stringValue;
     }
 
-    /**
-     * set int Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param value          String value
-     * @param preferenceKey  Key name of the Preference
-     */
-    public  void setIntPrefrences(Context context, String preferenceName, int value, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(preferenceName, value);
-        editor.apply();
-    }
-
-    /**
-     * get int Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param preferenceKey  Key name of the Preference
-     * @return value of saved preference. If value is not set, return 0
-     */
-    public  int getIntPrefrences(Context context, String preferenceName, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(preferenceName, 0);
-    }
-
-    /**
-     * set Float Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param value          String value
-     * @param preferenceKey  Key name of the Preference
-     */
-    public  void setFloatPrefrences(Context context, String preferenceName, Float value, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putFloat(preferenceName, value);
-        editor.apply();
-    }
-
-    /**
-     * get Float Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param preferenceKey  Key name of the Preference
-     * @return value of saved preference. If value is not set, return 0
-     */
-    public  Float getFloatPrefrences(Context context, String preferenceName, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        return sharedPreferences.getFloat(preferenceName, 0);
-    }
-
-    /**
-     * set boolean Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param value          String value
-     * @param preferenceKey  Key name of the Preference
-     */
-    public  void setBooleanPrefrences(Context context, String preferenceName, boolean value, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(preferenceName, value);
-        editor.apply();
-    }
-
-    /**
-     * get boolean Preference value
-     *
-     * @param context        Context
-     * @param preferenceName Name of your Preference
-     * @param preferenceKey  Key name of the Preference
-     * @return value of saved preference. If value is not set, return false
-     */
-    public  boolean getBooleanPrefrences(Context context, String preferenceName, String preferenceKey) {
-        sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean(preferenceName, false);
-    }
 
     /**
      * clear all preference in a preference key
@@ -455,42 +365,6 @@ public class AppUtils {
             alertDialog.show();
         }
     }
-//    public void showAlertDialogwithMessage(Context context,String message) {
-//
-//        CardView btnOk;
-//        TextView txtMsg;
-//        ImageView imgClose;
-//
-//        final AlertDialog.Builder dilaog =
-//                latest AlertDialog.Builder(context, R.style.CustomDialogs);
-//        LayoutInflater layoutInflater = LayoutInflater.from(context);
-//        final View view = layoutInflater.inflate(R.layout.no_data_availavle, null);
-//        dilaog.setView(view);
-//        final AlertDialog subjectAlertDialog = dilaog.create();
-//
-//        btnOk = (CardView) view.findViewById(R.id.btnOk);
-//        txtMsg = (TextView) view.findViewById(R.id.txtMsg);
-//        imgClose = view.findViewById(R.id.imgClose);
-//        imgClose.setVisibility(View.VISIBLE);
-//        txtMsg.setText(message);
-//        btnOk.setOnClickListener(latest View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                subjectAlertDialog.dismiss();
-//            }
-//        });
-//
-//        imgClose.setOnClickListener(latest View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                subjectAlertDialog.dismiss();
-//            }
-//        });
-//
-//        dilaog.setCancelable(true);
-//        subjectAlertDialog.setCancelable(true);
-//        subjectAlertDialog.show();
-//    }
     public byte[] getFileDataFromImagePath(String imagePath) {
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -597,31 +471,6 @@ public class AppUtils {
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
     }
-    public  String setDate(String date) {
-        String results = date.replaceAll("^/Date\\(", "");
-
-        String millisecond = results.substring(0, results.indexOf('+'));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(millisecond));
-        Date dateData = new Date(calendar.getTimeInMillis());
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy", Locale.getDefault());
-
-        return simpleDateFormat.format(dateData);
-    }
-    public  String getDayTime(String date) {
-        String results = date.replaceAll("^/Date\\(", "");
-
-        String millisecond = results.substring(0, results.indexOf('+'));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(millisecond));
-        Date dateData = new Date(calendar.getTimeInMillis());
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
-
-        return simpleDateFormat.format(dateData);
-
-    }
     public  boolean isValidPassword(final String password) {
         Pattern pattern;
         Matcher matcher;
@@ -637,32 +486,6 @@ public class AppUtils {
 
         return arrayMonths[month];
     }
-    public String setStartEndDates(String currentServerDate) {
-        SimpleDateFormat dfSource = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat dfDest = new SimpleDateFormat("MM/dd/yyyy");
-        String strReturnDate = "";
-        try {
-            Date sourceDate = dfSource.parse(currentServerDate);
-            Date destDate = dfDest.parse(dfDest.format(sourceDate));
-
-            strReturnDate += dfDest.format(destDate);
-
-            Calendar c = Calendar.getInstance();
-            c.setTime(destDate);
-            c.set(Calendar.DATE, c.getActualMaximum(Calendar.DATE));
-
-            Date lastDate = c.getTime();
-
-            strReturnDate += "--" + dfDest.format(lastDate);
-
-            return strReturnDate;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-
-
-    }
     public String roundTwoDecimalsandConvertToString(double d)
     {
         return String.format("%.2f",d);
@@ -672,85 +495,7 @@ public class AppUtils {
         DecimalFormat twoDForm = new DecimalFormat("#.##");
         return Double.valueOf(twoDForm.format(d));
     }
-    public String setDateFormat(String strdate) {
-        String formattedDate = "";
-        try {
-            //String curerentdate = latest SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(latest Date());
-            DateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("yyyy/MM/dd");
-            Date date = null;
 
-            try {
-                date = originalFormat.parse(strdate);
-                formattedDate = targetFormat.format(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            return formattedDate;
-        }
-        return formattedDate;
-    }
-    public String setDateFormatFromServer(String strdate) {
-        String formattedDate = "";
-        try {
-            //String curerentdate = latest SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(latest Date());
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = null;
-
-            try {
-                date = originalFormat.parse(strdate);
-                formattedDate = targetFormat.format(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            return formattedDate;
-        }
-        return formattedDate;
-    }public String setDateFormatToServer(String strdate) {
-        String formattedDate = "";
-        try {
-            //String curerentdate = latest SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(latest Date());
-            DateFormat originalFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = null;
-
-            try {
-                date = originalFormat.parse(strdate);
-                formattedDate = targetFormat.format(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            return formattedDate;
-        }
-        return formattedDate;
-    }
-    public String setDateTimeFormatFromServer(String strdate) {
-        String formattedDate = "";
-        try {
-            //String curerentdate = latest SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(latest Date());
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy hh:mm a");
-            Date date = null;
-
-            try {
-                date = originalFormat.parse(strdate);
-                formattedDate = targetFormat.format(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            return formattedDate;
-        }
-        return formattedDate;
-    }
     ///set Lang for whole Project
     public void setLang(Context context)
     {
@@ -906,16 +651,7 @@ public class AppUtils {
         return ageS;
     }
 
-    public String onCmToFtConversion(double cmvalue){
-        double ft=cmvalue * 0.032808;
-        String ft_value= String.valueOf(((float)Math.round(ft * 100) / 100));
-        return  ft_value;
-    }public String onKgToLbsConversion(double kg){
-        double wightInLBS = kg / 0.45359237;
-        String LBS_value= String.valueOf(((float)Math.round(wightInLBS * 100) / 100));
-        return  LBS_value;
-    }
-    public void setTextToTextview(String text,TextView textView){
+    public void setText(TextView textView,String text){
         if(TextUtils.isEmpty(text)){
             textView.setText("-");
         }else {
@@ -923,16 +659,7 @@ public class AppUtils {
         }
 
     }
-    public void setTextToTextviewYes_No(String text,TextView textView){
-        if(TextUtils.isEmpty(text)){
-            textView.setText("-");
-        }else if(text.contentEquals("true")){
-            textView.setText("Yes");
-        }else {
-            textView.setText("No");
-        }
 
-    }
     public int onImageRotateAnimation(ImageView imageView,int rotationAngle){
         ObjectAnimator anim = ObjectAnimator.ofFloat(imageView, "rotation",rotationAngle, rotationAngle + 180);
         anim.setDuration(500);
@@ -942,4 +669,82 @@ public class AppUtils {
         return  rotationAngle;
     }
 
+    public void setImage(ImageView view,Context context,String url){
+        Glide.with(context)
+                .load(url)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        //on load failed
+                        view.setVisibility(View.VISIBLE);
+                        view.setBackgroundResource(R.drawable.profile);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        //on load success
+
+                        view.setVisibility(View.VISIBLE);
+                        return false;
+                    }
+                })
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(view);
+    }
+    public int getCountOfDays(String createdDateString, String expireDateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        Date createdConvertedDate = null, expireCovertedDate = null, todayWithZeroTime = null;
+        try {
+            createdConvertedDate = dateFormat.parse(createdDateString);
+            expireCovertedDate = dateFormat.parse(expireDateString);
+
+            Date today = new Date();
+
+            todayWithZeroTime = dateFormat.parse(dateFormat.format(today));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        int cYear = 0, cMonth = 0, cDay = 0;
+
+        if (createdConvertedDate.after(todayWithZeroTime)) {
+            Calendar cCal = Calendar.getInstance();
+            cCal.setTime(createdConvertedDate);
+            cYear = cCal.get(Calendar.YEAR);
+            cMonth = cCal.get(Calendar.MONTH);
+            cDay = cCal.get(Calendar.DAY_OF_MONTH);
+
+        } else {
+            Calendar cCal = Calendar.getInstance();
+            cCal.setTime(todayWithZeroTime);
+            cYear = cCal.get(Calendar.YEAR);
+            cMonth = cCal.get(Calendar.MONTH);
+            cDay = cCal.get(Calendar.DAY_OF_MONTH);
+        }
+
+
+        Calendar eCal = Calendar.getInstance();
+        eCal.setTime(expireCovertedDate);
+
+        int eYear = eCal.get(Calendar.YEAR);
+        int eMonth = eCal.get(Calendar.MONTH);
+        int eDay = eCal.get(Calendar.DAY_OF_MONTH);
+
+        Calendar date1 = Calendar.getInstance();
+        Calendar date2 = Calendar.getInstance();
+
+        date1.clear();
+        date1.set(cYear, cMonth, cDay);
+        date2.clear();
+        date2.set(eYear, eMonth, eDay);
+
+        long diff = date2.getTimeInMillis() - date1.getTimeInMillis();
+
+        float dayCount = (float) diff / (24 * 60 * 60 * 1000);
+        int DayCount= (int) (dayCount+1);
+
+        return DayCount;
+    }
 }

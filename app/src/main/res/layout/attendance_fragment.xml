@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/button_selector_round_color"
+            android:fontFamily="@font/proxima_nova"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:layout_margin="@dimen/_8sdp"
+            android:visibility="visible" />
+
+
+
+        <com.vclassrooms.Common.CustomSwipeToRefresh
+            android:id="@+id/myClassesSwipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btnSubmit">
+
+            <!--<android.support.v4.widget.NestedScrollView-->
+            <!--android:id="@+id/myClassesNested"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <RelativeLayout
+                android:id="@+id/relativeRecyandHearder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_rectangle">
+
+
+
+                <RelativeLayout
+                    android:id="@+id/titleRelative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_rectangle_arc"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:fontFamily="@font/proxima_nova"
+                        android:text="Attentance"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_17sdp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/myClassesRecHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleRelative"
+                    android:layout_marginTop="-15dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/relChangeDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/gray_circle"
+                        android:padding="@dimen/_4sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/home_calender" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/textViewChangeDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Change Date"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_4sdp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Date"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_standard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/myClassesViewLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/myClassesRecHorizontal"
+                    android:background="@color/blue" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_below="@+id/myClassesViewLine"
+                    android:background="@color/gray_100" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/myClassesViewLine"
+                    android:background="@color/gray_100">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@color/gray_100"
+                        android:focusableInTouchMode="true" />
+
+                    <TextView
+                        android:id="@+id/txt_no_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableTop="@drawable/noresultfound"
+                        android:fontFamily="@font/proxima_nova"
+                        android:lineSpacingExtra="@dimen/_2sdp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_20sdp"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_16sdp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </com.vclassrooms.Common.CustomSwipeToRefresh>
+
+        <TextView
+            android:id="@+id/txt_no_Internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/proxima_nova"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:orientation="vertical"
+            android:padding="@dimen/_30sdp"
+            android:text="@string/no_internet_swipe_to_refresh"
+            android:textAlignment="center"
+            android:textColor="@color/gray_1100"
+            android:textSize="@dimen/_16sdp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</FrameLayout>

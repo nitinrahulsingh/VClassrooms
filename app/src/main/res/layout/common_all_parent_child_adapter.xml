@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relaParent"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mBackgroundAssign"
+        android:layout_width="@dimen/_96sdp"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/hack"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_15sdp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/cardBackdround"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:id="@+id/relStuName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_25sdp">
+
+                    <TextView
+                        android:id="@+id/txtChildrenName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/proxima_nova"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_14sdp"
+                        android:maxLines="2"/>
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgStudent"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/gray_circle"
+                android:visibility="gone"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="@dimen/_2sdp" />
+
+            <RelativeLayout
+                android:id="@+id/no_image_relative"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ring">
+
+                <TextView
+                    android:id="@+id/txtStudentNames"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/proxima_nova"
+                    android:textColor="@color/gray_1100"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/hack1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_15sdp"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+

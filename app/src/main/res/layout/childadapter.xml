@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="2"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="right"
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:visibility="visible"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="@dimen/_2sdp"
+                    android:background="@drawable/profile"
+                    android:layout_gravity="center"
+                    android:elevation="30dp"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/proxima_nova"
+                android:textColorHint="@color/gray_1100"
+                android:layout_weight="0.9"/>
+
+        </LinearLayout>
+
+</LinearLayout>

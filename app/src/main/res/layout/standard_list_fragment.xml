@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_mainLayout"
+    android:layout_width="match_parent"
+    android:clickable="false"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <com.vclassrooms.Common.CustomSwipeToRefresh
+            android:id="@+id/classesSwipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:background="@color/gray_100"
+                android:id="@+id/myClassesNested"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:ignore="UselessParent">
+
+                        <RelativeLayout
+                            android:id="@+id/relativeRecyandHearder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/gradient_rectangle"
+                            android:orientation="vertical">
+
+
+
+                            <RelativeLayout
+                                android:id="@+id/titleRelative"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/white_rectangle_arc"
+                                android:padding="@dimen/_5sdp"
+                                tools:ignore="UselessParent">
+
+                                <TextView
+                                    android:id="@+id/tittle_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/proxima_nova"
+                                    android:text="Standard"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/gray_1100"
+                                    android:textSize="@dimen/_17sdp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/myClassesRecHorizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_below="@id/titleRelative"
+                                android:layout_centerInParent="true"
+                                android:layout_marginBottom="@dimen/_25sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginEnd="@dimen/_5sdp">
+                                <LinearLayout
+                                    android:id="@+id/linearSearches"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:id="@+id/searchBarLinear"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/relatIveFirst"
+                                        android:layout_marginStart="@dimen/_8sdp"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:layout_marginEnd="@dimen/_8sdp"
+                                        android:background="@drawable/circular_border_shape"
+                                        android:orientation="horizontal">
+
+                                        <EditText
+                                            android:maxLength="100"
+                                            android:id="@+id/edtSearch"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="@dimen/_8sdp"
+                                            android:layout_weight="1.6"
+                                            android:background="@color/transparent"
+                                            android:fontFamily="@font/proxima_nova"
+                                            android:hint="Search"
+                                            android:inputType="text"
+                                            android:padding="@dimen/_5sdp"
+                                            android:textSize="@dimen/_14sdp"
+                                            android:singleLine="true"
+                                            android:maxLines="1"/>
+
+                                        <ImageView
+                                            android:id="@+id/searchClose"
+                                            android:layout_width="@dimen/_15sdp"
+                                            android:layout_height="@dimen/_15sdp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="@dimen/_2sdp"
+                                            android:layout_marginEnd="@dimen/_2sdp"
+                                            android:src="@drawable/close_cross"
+                                            android:visibility="gone"/>
+
+                                        <RelativeLayout
+                                            android:id="@+id/relativeSearchAnn"
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.4"
+                                            android:background="@drawable/arc_rectangle">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerInParent="true"
+                                                android:src="@drawable/search" />
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                            <View
+                                android:id="@+id/myClassesViewLine"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_below="@+id/myClassesRecHorizontal"
+                                android:background="@color/btn_color" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_100sdp"
+                                android:layout_below="@+id/myClassesViewLine"
+                                android:background="@color/gray_100" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@+id/myClassesViewLine"
+                                android:background="@color/gray_100">
+
+
+
+                                <RelativeLayout
+                                    android:id="@+id/relHeader"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:id="@+id/imgMyClassAttendance"
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_marginEnd="@dimen/_6sdp"
+                                        android:padding="@dimen/_4sdp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgMyClassLunchCount"
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_6sdp"
+                                        android:layout_toRightOf="@id/imgMyClassAttendance"
+                                        android:padding="@dimen/_4sdp" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_2sdp"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:layout_marginBottom="@dimen/_2sdp"
+                                        android:layout_toRightOf="@id/imgMyClassLunchCount"
+                                        android:gravity="center_vertical"
+                                        android:paddingLeft="@dimen/_6sdp"
+                                        android:paddingTop="@dimen/_8sdp"
+                                        android:paddingBottom="@dimen/_8sdp">
+
+                                        <TextView
+                                            android:id="@+id/textViewClassName"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:text="Class Name"
+                                            android:textColor="@color/blue"
+                                            />
+
+
+                                        <TextView
+                                            android:visibility="gone"
+                                            android:id="@+id/textViewTeacher"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:text="Teacher Name"
+                                            android:textColor="@color/blue"
+                                            />
+                                    </LinearLayout>
+                                </RelativeLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/classesRecyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relHeader"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:background="@color/gray_100"
+                                    android:focusableInTouchMode="true" />
+
+                                <TextView
+                                    android:id="@+id/txt_no_data"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:drawableTop="@drawable/noresultfound"
+                                    android:fontFamily="@font/proxima_nova"
+                                    android:lineSpacingExtra="@dimen/_2sdp"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/_20sdp"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/gray_1100"
+                                    android:textSize="@dimen/_16sdp"
+                                    android:visibility="gone" />
+
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </com.vclassrooms.Common.CustomSwipeToRefresh>
+
+        <TextView
+            android:id="@+id/txt_no_Internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/proxima_nova"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:orientation="vertical"
+            android:padding="@dimen/_30sdp"
+            android:text="@string/no_internet_swipe_to_refresh"
+            android:textAlignment="center"
+            android:textColor="@color/gray_1100"
+            android:textSize="@dimen/_16sdp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</FrameLayout>

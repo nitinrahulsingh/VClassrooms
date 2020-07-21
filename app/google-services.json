@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "762784936386",
+    "firebase_url": "https://vclassrooms-bb34c.firebaseio.com",
+    "project_id": "vclassrooms-bb34c",
+    "storage_bucket": "vclassrooms-bb34c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762784936386:android:2d08b66f3951d7c03ee65b",
+        "android_client_info": {
+          "package_name": "com.vclassrooms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762784936386-43jtt7ck2su4duhiiiguvlo9hrq6gudb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vclassrooms",
+            "certificate_hash": "eeca758a838bcb7870750f1de612199441597171"
+          }
+        },
+        {
+          "client_id": "762784936386-0mfpoamia275d4a3hvakcsterukjg9kl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdkZXNIiDwHsNMbj_3lntp1ZkS9wWDKV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762784936386-0mfpoamia275d4a3hvakcsterukjg9kl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

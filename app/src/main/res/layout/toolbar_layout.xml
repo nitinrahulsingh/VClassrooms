@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    android:background="@color/light_gray"
+    app:titleTextColor="@color/black"
+    app:contentInsetStartWithNavigation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            tools:ignore="RelativeOverlap"
+            android:layout_centerVertical="true">
+
+            <RelativeLayout
+                android:id="@+id/toolAnnounce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/_ripple"
+                    android:src="@drawable/noticeboard" />
+
+                <TextView
+                    android:id="@+id/announceCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:background="@drawable/red_cirlce"
+                    android:gravity="center"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/_9sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:fontFamily="@font/proxima_nova"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:id="@+id/toolMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_12sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/_ripple"
+                    android:backgroundTint="@color/black"
+                    android:src="@drawable/icon_notification" />
+
+                <TextView
+                    android:id="@+id/msgCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:background="@drawable/red_cirlce"
+                    android:gravity="center"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/_9sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:fontFamily="@font/proxima_nova"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:visibility="visible"
+                android:id="@+id/e_books_relative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:focusableInTouchMode="true">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/_ripple"
+                    android:src="@drawable/e_study" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</androidx.appcompat.widget.Toolbar>

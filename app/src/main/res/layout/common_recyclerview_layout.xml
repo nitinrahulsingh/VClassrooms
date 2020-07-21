@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_100"
+        tools:context=".activities.AnnouncementActivity">
+
+        <com.vclassrooms.Common.CustomSwipeToRefresh
+            android:id="@+id/conductSwipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/relativeParentFirst"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/gradient_rectangle_dark">
+
+                        <RelativeLayout
+                            android:id="@+id/relatIveFirst"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_rectangle_arc"
+                            android:padding="@dimen/_5sdp"
+                            >
+
+                            <TextView
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:id="@+id/tittle_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/proxima_nova"
+                                android:text="ddddd"
+                                android:textAlignment="center"
+                                android:textColor="@color/gray_1100"
+                                android:textSize="@dimen/_17sdp" />
+
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:id="@+id/myClassesRecHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_23sdp"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:id="@+id/relAdd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:padding="@dimen/_4sdp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_31sdp"
+                                    android:layout_height="@dimen/_31sdp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/plus" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearSearches"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/relatIveFirst"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_34sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_24sdp"
+                            android:background="@drawable/circular_border_shape"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:maxLength="100"
+                                android:id="@+id/edtSearch"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_weight="1.6"
+                                android:background="@color/transparent"
+                                android:fontFamily="@font/proxima_nova"
+                                android:hint="@string/search"
+                                android:inputType="text"
+                                android:padding="@dimen/_5sdp"
+                                android:textSize="@dimen/_14sdp"
+                                android:singleLine="true"
+                                android:maxLines="1"/>
+
+                            <ImageView
+                                android:id="@+id/searchClose"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:src="@drawable/close_cross"
+                                android:visibility="gone"/>
+
+                            <RelativeLayout
+                                android:id="@+id/relativeSearch"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.4"
+                                android:background="@drawable/arc_rectangle">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/search" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:background="@color/gray_100"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/relativeParentFirst"
+                        android:focusableInTouchMode="true"
+                        android:layoutAnimation="@anim/_layoutanimation"/>
+                </RelativeLayout>
+
+        </com.vclassrooms.Common.CustomSwipeToRefresh>
+
+        <TextView
+            android:id="@+id/txt_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/proxima_nova"
+            android:orientation="vertical"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/noresultfound"
+            android:text="@string/no_data"
+            android:textColor="@color/gray_1100"
+            android:textSize="@dimen/_16sdp"
+            android:visibility="gone" />
+    </RelativeLayout>
+</FrameLayout>

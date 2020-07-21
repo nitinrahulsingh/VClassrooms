@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeParentFirst"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_170sdp"
+                android:background="@drawable/gradient_rectangle">
+
+                <RelativeLayout
+                    android:id="@+id/relatIveFirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_rectangle_arc"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/titlealert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/proxima_nova"
+                        android:text="@string/Profile"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_17sdp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_15sdp"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:id="@+id/imageRelative"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_img"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_80sdp"
+
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:src="@drawable/user" />
+
+                    </RelativeLayout>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardview"
+                        android:layout_below="@+id/imageRelative"
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="4dp"
+                        card_view:cardElevation="2dp"
+                        android:background="@color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        card_view:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:paddingTop="5dp"
+                            android:paddingBottom="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimary"
+                                android:fontFamily="@font/proxima_nova"
+                                android:textSize="@dimen/_20sdp"
+                                android:textStyle="bold"
+                                android:text="NAME"
+                                android:textAlignment="center"/>
+                            <TextView
+                                android:id="@+id/StdName"
+                                android:layout_below="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Std(div)"
+                                android:textAlignment="center"
+                                android:textSize="16dp" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardview2"
+                        android:layout_below="@+id/cardview"
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="4dp"
+                        card_view:cardElevation="2dp"
+                        android:background="@color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        card_view:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:paddingTop="5dp"
+                            android:paddingBottom="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/gender_img"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_margin="3dp"
+                                android:background="@drawable/gender"
+                                />
+                            <TextView
+                                android:paddingStart="8dp"
+                                android:padding="1dp"
+                                android:layout_toRightOf="@+id/gender_img"
+                                android:id="@+id/gendertv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Gender"
+                                android:textAlignment="textStart"
+                                android:gravity="start"
+                                android:paddingLeft="8dp"
+                                android:textSize="16dp" />
+                            <ImageView
+                                android:layout_below="@+id/gendertv"
+                                android:id="@+id/mobile_img"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_margin="3dp"
+                                android:background="@drawable/cell_phone"
+                                />
+                            <TextView
+                                android:paddingStart="8dp"
+                                android:id="@+id/MobileNotv"
+                                android:layout_toRightOf="@+id/mobile_img"
+                                android:layout_below="@+id/gendertv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="Mobile No"
+                                android:textAlignment="textStart"
+                                android:gravity="start"
+                                android:paddingLeft="8dp"
+                                android:textSize="16dp" />
+                            <ImageView
+                                android:layout_below="@+id/MobileNotv"
+                                android:id="@+id/email_img"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_margin="3dp"
+                                android:background="@drawable/email"
+                                />
+                            <TextView
+                                android:paddingStart="8dp"
+                                android:id="@+id/EmailIdtv"
+                                android:layout_below="@+id/MobileNotv"
+                                android:layout_toRightOf="@+id/email_img"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="Email id"
+                                android:textAlignment="textStart"
+                                android:gravity="start"
+                                android:paddingLeft="8dp"
+                                android:textSize="16dp" />
+                            <ImageView
+                                android:layout_below="@+id/EmailIdtv"
+                                android:id="@+id/dob_img"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_margin="3dp"
+                                android:background="@drawable/dob"
+                                />
+                            <TextView
+                                android:paddingStart="8dp"
+                                android:id="@+id/DOBtv"
+                                android:layout_below="@+id/EmailIdtv"
+                                android:layout_toRightOf="@+id/dob_img"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="DOB"
+                                android:textAlignment="textStart"
+                                android:gravity="start"
+                                android:paddingLeft="8dp"
+                                android:textSize="16dp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginBottom="24dp"
+                        android:layout_below="@+id/cardview2"
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="4dp"
+                        card_view:cardElevation="2dp"
+                        android:background="@color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        card_view:cardUseCompatPadding="true">
+                        <RelativeLayout
+
+                            android:paddingTop="5dp"
+                            android:paddingBottom="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <RelativeLayout
+                                android:id="@+id/relative"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                >
+                                <View
+                                    android:id="@+id/view2"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_width="1dp"
+                                    android:background="@color/colorPrimary"
+                                    android:layout_toRightOf="@+id/addrssimage"
+                                    android:layout_marginStart="25dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="25dp" />
+                                <ImageView
+                                    android:id="@+id/addrssimage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:background="@drawable/address"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginLeft="15dp" />
+                                <TextView
+                                    android:id="@+id/addresstv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_toRightOf="@+id/view2"
+                                    android:layout_marginStart="15dp"
+                                    android:textSize="16dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:text="Address" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </LinearLayout>
+            
+        </RelativeLayout>
+  
+
+</ScrollView>

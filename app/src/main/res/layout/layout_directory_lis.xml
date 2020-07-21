@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner"
+    style="@style/Theme.AppCompat.Dialog.Alert"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/txtClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:drawableStart="@drawable/ic_action_close"
+            android:fontFamily="@font/proxima_nova"
+            android:padding="@dimen/_4sdp"
+            android:layout_alignParentEnd="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+           >
+
+            <TextView
+                android:id="@+id/txtParent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/proxima_nova"
+                android:text="Parent"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone"/>
+
+            <View
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:background="@color/colorGrey"/>
+            <TextView
+                android:id="@+id/txtStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/proxima_nova"
+                android:text="Student"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:padding="@dimen/_10sdp"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:background="@color/colorGrey"/>
+
+            <TextView
+                android:id="@+id/txtStaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/proxima_nova"
+                android:text="Staff"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:padding="@dimen/_10sdp"/>
+            <View
+                android:visibility="visible"
+                android:id="@+id/view_Prospects"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:background="@color/colorGrey"/>
+
+            <TextView
+                android:visibility="visible"
+                android:id="@+id/txtProspects"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/proxima_nova"
+                android:text="Teacher"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:padding="@dimen/_10sdp"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

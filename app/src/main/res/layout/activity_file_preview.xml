@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgView_Back_arrow"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/_ripple"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/back_arrow" />
+
+            <TextView
+                android:id="@+id/toolbarHome_Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2.3"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/black"
+                android:textSize="21sp" />
+
+            <ImageView
+                android:id="@+id/imgView_reload"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toStartOf="@+id/imgView_app_logo"
+                android:background="@drawable/_ripple"
+                android:src="@drawable/curved_arrows" />
+
+            <ImageView
+                android:id="@+id/imgView_download"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="0.7"
+                android:background="@drawable/_ripple"
+                android:src="@drawable/download_folder" />
+
+            <ImageView
+                android:id="@+id/imgView_app_logo"
+                android:layout_width="45dp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/logo"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <WebView
+        android:id="@+id/webView_PdfViewer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+
+    <ProgressBar
+        android:id="@+id/progressBars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>
