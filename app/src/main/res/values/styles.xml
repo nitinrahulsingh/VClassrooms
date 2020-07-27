@@ -61,5 +61,8 @@
         <item name="colorControlHighlight">@color/blue</item>
         <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
     </style>
-
+    <style name="MyRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/gray_300</item>
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
 </resources>

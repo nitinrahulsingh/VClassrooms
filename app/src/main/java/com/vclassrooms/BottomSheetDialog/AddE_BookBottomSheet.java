@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.gson.Gson;
 import com.vclassrooms.Adapter.AttachmentAdapter;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
+import com.vclassrooms.Entity.AddEbookDetailsResponse;
 import com.vclassrooms.Entity.AddGalleryResponse;
 import com.vclassrooms.Entity.CommonSuccessResponse;
-import com.vclassrooms.Entity.StandardListResponse;
+import com.vclassrooms.Entity.ProfileDetailInsertResponse;
+import com.vclassrooms.Entity.StandardDivisionResponse;
+import com.vclassrooms.Entity.StandardDivisionResponse;
+import com.vclassrooms.Entity.SubjectDetailsResponse;
 import com.vclassrooms.Entity.UploadImageDetails;
 import com.vclassrooms.Interface.CommonInterface;
 import com.vclassrooms.R;
@@ -39,8 +45,11 @@ import com.vclassrooms.SearchableSpinner.SearchableSpinner;
 import com.vclassrooms.photopicker.activity.PickImageActivity;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,18 +79,19 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
     EditText et_tittle;
     @BindView(R.id.spinner)
     SearchableSpinner stdDiv_spinner;
+    @BindView(R.id.spinner2)
+    SearchableSpinner subjtSpinner;
     @BindView(R.id.et_comment)
     EditText et_comment;
     @BindView(R.id.spinner_cardview)
     CardView spinner_cardview;
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerview_attachment;
-    private ArrayList<String> pathList = new ArrayList<>();
-    private ArrayList<UploadImageDetails> uploadImageDetailslist = new ArrayList<>();
+    @BindView(R.id.file_name)
+    TextView file_name;
     String strMediaId;
     CommonInterface commonInterface;
-    String strStandardId="";
-    List<StandardListResponse.StandardDetail> mStandardDataList = new ArrayList<>();
+    String strStandardId="",strFileSize="",strDivisionId="",strSubjectId="";
+    List<StandardDivisionResponse.Division> mStandardDataList = new ArrayList<>();
+    List<SubjectDetailsResponse.Subject> subjectList = new ArrayList<>();
     String FilePath="";
     public AddE_BookBottomSheet newInstance(Fragment fragment) {
         commonInterface = (CommonInterface) fragment;
@@ -105,6 +115,7 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void init() {
+        file_name.setVisibility(View.GONE);
         strAuth = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_FCM);
         strRoleid = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERTYPEID);
         strUserId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERID);
@@ -112,10 +123,21 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
         strAcademicId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_ACADEMICYEAR);
         heading_tv.setText("E-Books");
         stdDiv_spinner.setHint("Select Standard");
+        subjtSpinner.setHint("Select Subject");
 
         stdDiv_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strStandardId=mStandardDataList.get(position).getStandardId().toString();
+                strDivisionId=mStandardDataList.get(position).getDivisionId().toString();
+                getSubjectApi();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        subjtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strSubjectId=subjectList.get(position).getSubjectId().toString();
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -131,7 +153,7 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
                 break;
             case R.id.btnSubmit:
                 if(isValid()){
-                    AddPDFDetailApi();
+                    onUploadImageApi(FilePath);
                 }
                 break;
             case R.id.linear_attach:
@@ -195,8 +217,11 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
                         displayName = myFile.getName();
                     }
                     FilePath = getPath(getContext(), data.getData());
-                    UploadImageDetails uploadImageDetail = new UploadImageDetails( FilePath, "image");
-                    uploadImageDetailslist.add(uploadImageDetail);
+                    file_name.setVisibility(View.VISIBLE);
+                    appUtils.setText(file_name,displayName);
+                    File f = new File(FilePath);
+                    long size = f.length();
+                    strFileSize=appUtils.formatSize(size);
                 }
             }
         }
@@ -212,12 +237,15 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
             appUtils.showToast(context,"Please enter detail");
             return false;
         }
-        if(uploadImageDetailslist.size()<0){
-            appUtils.showToast(context,"Please add image");
+        if(FilePath==null && FilePath.isEmpty()){
+            appUtils.showToast(context,"Please add File");
             return false;
         }
         if(strStandardId==null && strStandardId.isEmpty()){
             appUtils.showToast(context,"Please select standard");
+            return false;
+        }if(strSubjectId==null && strSubjectId.isEmpty()){
+            appUtils.showToast(context,"Please select Subject");
             return false;
         }
         return true;
@@ -225,19 +253,20 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
     private void getStandardDetailApi() {
         try {
             appUtils.showProgressbar(context);
-            Call<StandardListResponse> call = ApiService.buildService(context).getStandardList(strAuth, "GetStandard", strRoleid, strUserId, strSchoolId, strAcademicId);
-            call.enqueue(new Callback<StandardListResponse>() {
+            Call<StandardDivisionResponse> call = ApiService.buildService(context).getStandardDivisionList(strAuth, "GetStandardDivision", strRoleid, strUserId, strSchoolId, strAcademicId, "0");
+            call.enqueue(new Callback<StandardDivisionResponse>() {
                 @Override
-                public void onResponse(Call<StandardListResponse> call, Response<StandardListResponse> response) {
+                public void onResponse(Call<StandardDivisionResponse> call, Response<StandardDivisionResponse> response) {
                     appUtils.hideProgressbar();
                     if (response.body() != null) {
                         if (response.body().getStatusCode().equals(0)) {
-                            if (response.body().getData().getStandardDetails() != null && response.body().getData().getStandardDetails().size()>0) {
-                                mStandardDataList = response.body().getData().getStandardDetails();
-                                ArrayAdapter<StandardListResponse.StandardDetail> adapter =
-                                        new ArrayAdapter<StandardListResponse.StandardDetail>(context, android.R.layout.simple_spinner_item, mStandardDataList);
+                            if (response.body().getData().getDivision() != null && response.body().getData().getDivision().size()>0) {
+                                mStandardDataList = response.body().getData().getDivision();
+                                ArrayAdapter<StandardDivisionResponse.Division> adapter =
+                                        new ArrayAdapter<StandardDivisionResponse.Division>(context, android.R.layout.simple_spinner_item, mStandardDataList);
                                 stdDiv_spinner.setAdapter(adapter);
                                 strStandardId=mStandardDataList.get(0).getStandardId().toString();
+                                strDivisionId=mStandardDataList.get(0).getDivisionId().toString();
                             } else {
                                 appUtils.showToast(context, getString(R.string.no_data));
                             }
@@ -253,7 +282,7 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
                 }
 
                 @Override
-                public void onFailure(Call<StandardListResponse> call, Throwable t) {
+                public void onFailure(Call<StandardDivisionResponse> call, Throwable t) {
                     appUtils.hideProgressbar();
                     appUtils.showToast(context, getString(R.string.error_message));
                 }
@@ -262,24 +291,39 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
             e.getMessage();
         }
     }
-    private void AddPDFDetailApi() {
+    private void onUploadImageApi(String filedetail) {
+        String command="";
+        command="Insert";
+        appUtils.showProgressbar(context);
+
+        String extension = filedetail.substring(filedetail.lastIndexOf("."));
+        File file = new File(filedetail);
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse("image/*"),
+                        file
+                );
+        String imagename = file.getName();
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("picture", imagename, requestFile);
         try {
-            appUtils.showProgressbar(context);
-            Call<AddGalleryResponse> call = ApiService.buildService(context).onAddGalleryDetail(strAuth,"Insert",et_tittle.getText().toString(),et_comment.getText().toString()
-                    ,strSchoolId,strAcademicId,strUserId);
-            call.enqueue(new Callback<AddGalleryResponse>() {
+            String filename = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_SS", Locale.getDefault()).format(new Date());
+            extension = filename + extension;
+            Call<AddEbookDetailsResponse> call = ApiService.buildService(context).onUploadEbook(body,strAuth,command,et_tittle.getText().toString(),et_comment.getText().toString(),
+                   strSchoolId,strAcademicId,strUserId,extension,strRoleid,strStandardId,strFileSize,strSubjectId,strDivisionId);
+            call.enqueue(new Callback<AddEbookDetailsResponse>() {
                 @Override
-                public void onResponse(Call<AddGalleryResponse> call, Response<AddGalleryResponse> response) {
+                public void onResponse(Call<AddEbookDetailsResponse> call, Response<AddEbookDetailsResponse> response) {
                     appUtils.hideProgressbar();
                     if (response.body() != null) {
                         if (response.body().getStatusCode().equals(0)) {
-                            if(response.body().getData().getGalleryDetails()!=null && response.body().getData().getGalleryDetails().size()>0){
-                                strMediaId=response.body().getData().getGalleryDetails().get(0).getColumn1();
-                                onUploadImageApi(response.body().getData().getGalleryDetails().get(0).getColumn1());
+                            if(response.body().getData().getEbookDetails()!=null){
+                                appUtils.showToast(context, getString(R.string.success));
+                                commonInterface.OnCommonInterfaceClick(0,true);
+                                dismiss();
                             }else {
                                 appUtils.showToast(context, getString(R.string.fail_message));
                             }
-
                         } else  if (response.body().getStatusCode().equals(1)){
                             appUtils.showToast(context, getString(R.string.error_message));
                         }else  if (response.body().getStatusCode().equals(2)){
@@ -292,7 +336,7 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
                 }
 
                 @Override
-                public void onFailure(Call<AddGalleryResponse> call, Throwable t) {
+                public void onFailure(Call<AddEbookDetailsResponse> call, Throwable t) {
                     appUtils.hideProgressbar();
                     appUtils.showToast(context, getString(R.string.error_message));
                 }
@@ -301,64 +345,38 @@ public class AddE_BookBottomSheet extends BottomSheetDialogFragment {
             e.getMessage();
         }
     }
-
-    @NonNull
-    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri, int position) {
-
-        MultipartBody.Part part;
-
-        try {
-            File file = new File(String.valueOf(fileUri));
-            RequestBody requestFile =
-                    RequestBody.create(
-                            MediaType.parse("image/*"),
-                            file
-                    );
-            // MultipartBody.Part is used to send also the actual file name
-            part = MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            part = null;
-        }
-
-        return part;
-
-
-    }
-    private void onUploadImageApi(String mediaId) {
-        List<MultipartBody.Part> parts = new ArrayList<>();
-        if (uploadImageDetailslist != null) {
-            // create part for file (photo, video, ...)
-            for (int i = 0; i < uploadImageDetailslist.size(); i++) {
-                parts.add(prepareFilePart(uploadImageDetailslist.get(i).getImageName(), Uri.parse(uploadImageDetailslist.get(i).getFilePath()),i));
-            }
-        }
+    private void getSubjectApi() {
         try {
             appUtils.showProgressbar(context);
-            Call<CommonSuccessResponse> call = ApiService.buildService(context).onUploadImages(strAuth,parts,"insert",strSchoolId,strAcademicId,strUserId,"3",mediaId);
-            call.enqueue(new Callback<CommonSuccessResponse>() {
+            Call<SubjectDetailsResponse> call = ApiService.buildService(context).getSubjectList(strAuth, "getSubject", strRoleid, strUserId, strSchoolId, strAcademicId, strStandardId);
+            call.enqueue(new Callback<SubjectDetailsResponse>() {
                 @Override
-                public void onResponse(Call<CommonSuccessResponse> call, Response<CommonSuccessResponse> response) {
+                public void onResponse(Call<SubjectDetailsResponse> call, Response<SubjectDetailsResponse> response) {
                     appUtils.hideProgressbar();
-                    if (response.code() == 401) {
-                    } else {
-                        if (response.body() != null) {
-                            if (response.body().getStatusCode().equals(0)) {
-                                appUtils.showToast(context, getString(R.string.success));
-                                commonInterface.OnCommonInterfaceClick(0,true);
-                                dismiss();
+                    if (response.body() != null) {
+                        if (response.body().getStatusCode().equals(0)) {
+                            if (response.body().getData().getSubject() != null && response.body().getData().getSubject().size()>0) {
+                                subjectList = response.body().getData().getSubject();
+                                ArrayAdapter<SubjectDetailsResponse.Subject> adapter =
+                                        new ArrayAdapter<SubjectDetailsResponse.Subject>(context, android.R.layout.simple_spinner_item, subjectList);
+                                subjtSpinner.setAdapter(adapter);
+                                strSubjectId=subjectList.get(0).getSubjectId().toString();
                             } else {
-                                appUtils.showToast(context, getString(R.string.error_message));
+                                appUtils.showToast(context, getString(R.string.no_data));
                             }
-                        } else {
+                        } else if (response.body().getStatusCode().equals(1)) {
                             appUtils.showToast(context, getString(R.string.error_message));
+                        } else if (response.body().getStatusCode().equals(2)) {
+                            appUtils.showToast(context, getString(R.string.unauthorize_message));
                         }
+                    } else {
+                        appUtils.showToast(context, getString(R.string.error_message));
                     }
 
                 }
 
                 @Override
-                public void onFailure(Call<CommonSuccessResponse> call, Throwable t) {
+                public void onFailure(Call<SubjectDetailsResponse> call, Throwable t) {
                     appUtils.hideProgressbar();
                     appUtils.showToast(context, getString(R.string.error_message));
                 }

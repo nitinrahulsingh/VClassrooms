@@ -24,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ import com.vclassrooms.Entity.LeaveRequest;
 import com.vclassrooms.Entity.LeaveTypeResponse;
 import com.vclassrooms.Entity.StandardDivisionResponse;
 import com.vclassrooms.Entity.UploadImageDetails;
+import com.vclassrooms.Interface.CommonInterface;
 import com.vclassrooms.R;
 import com.vclassrooms.Retrofit.ApiService;
 import com.vclassrooms.SearchableSpinner.SearchableSpinner;
@@ -91,7 +93,11 @@ public class ApplyLeaveBottomSheet extends BottomSheetDialogFragment implements 
     private boolean isEndDate = false;
     int intLeaveTypeId=0;
     List<LeaveTypeResponse.LeaveTypeDetail> leaveTypeDetails = new ArrayList<>();
-
+    CommonInterface commonInterface;
+    public ApplyLeaveBottomSheet newInstance(Fragment fragment) {
+        commonInterface = (CommonInterface) fragment;
+        return new ApplyLeaveBottomSheet();
+    }
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
@@ -292,6 +298,7 @@ public class ApplyLeaveBottomSheet extends BottomSheetDialogFragment implements 
                             if (response.body().getData().getLeaveDeatils() != null ) {
                                 if(response.body().getData().getLeaveDeatils().get(0).getColumn1().contentEquals("Successfull")){
                                     appUtils.showToast(context, getString(R.string.leave_apply_successfully));
+                                    commonInterface.OnCommonInterfaceClick(0,true);
                                     dismiss();
                                 }else {
                                     appUtils.showToast(context, getString(R.string.fail_message));

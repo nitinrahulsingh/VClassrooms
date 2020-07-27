@@ -2,8 +2,10 @@ package com.vclassrooms.Fragment;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,8 +68,9 @@ public class SelfAttendanceFragment extends Fragment  implements
     public int[] yValues = {0, 0, 0,0};
     public String[] xValues = {"Present", "Absent", "Holiday","Excused"};
     TextView tv_no_data;
-    String strClassName,strDivisionId,strStandardID;;
+    String strClassName,strDivisionId,strStandardID,isEmployeeSelf;;
     List<AttendanceDetail> studentLists=new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,22 +85,21 @@ public class SelfAttendanceFragment extends Fragment  implements
     private void init() {
         strAuth = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_FCM);
         strRoleid = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERTYPEID);
-        strUserId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERID);
+      //  strUserId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERID);
         strSchoolId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_SCHOOLID);
         strAcademicId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_ACADEMICYEAR);
-        if(strRoleid.contentEquals("3")){
-            strClassName=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDNAME)+" ("
-                    +appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONNAME)+")";
-            strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
-            strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
-        }else if(strRoleid.contentEquals("2")){
+        if(strRoleid.contentEquals("2")){
             strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
             strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
         } else {
-            strClassName=getArguments().getString("ClassName");
             strDivisionId=getArguments().getString("DivisionId");
             strStandardID=getArguments().getString("StandardID");
         }
+        strUserId=getArguments().getString("UserId");
+        if(strUserId==null && TextUtils.isEmpty(strUserId)){
+            strUserId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERID);
+        }
+        isEmployeeSelf=getArguments().getString("isEmployeeSelf");
         tv_no_data=(TextView)mview.findViewById(R.id.tv_no_data);
         chart = mview.findViewById(R.id.chart1);
         chart.setUsePercentValues(true);
@@ -132,54 +134,29 @@ public class SelfAttendanceFragment extends Fragment  implements
 
         // entry label styling
         chart.setEntryLabelColor(Color.WHITE);
-        //chart.setEntryLabelTypeface(tfRegular);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            chart.setEntryLabelTypeface(getResources().getFont(R.font.muli_regular));
+//        }
         chart.setEntryLabelTextSize(12f);
         collapsibleCalendar = mview.findViewById(R.id.collapsibleCalendarView);
-//        collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
-//            @Override
-//            public void onDaySelect() {
-//            }
-//
-//            @Override
-//            public void onItemClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onDataUpdate() {
-//
-//            }
-//
-//            @Override
-//            public void onMonthChange() {
-//
-//            }
-//
-//            @Override
-//            public void onWeekChange(int i) {
-//
-//            }
-//        });
-//        if (appUtils.isNetworkAvailableWithToast(getContext())) {
-//            Calendar c = Calendar.getInstance();
-//            int Year = c.get(Calendar.YEAR);
-//            int  Month = c.get(Calendar.MONTH)+1;
-//            getAttendanceDetals(Month, Year);
-//        }
         getAttendanceStudentListApi();
     }
 
 
     private void getAttendanceStudentListApi() {
         try {
-            String command="";
-            if(strRoleid.contentEquals("2")){
+            String command="",role="";
+            if(isEmployeeSelf.contentEquals("False")){
                 command="getStudentAttendance" ;
-            }else {
-                command="getEmployeeAttendance";
+                role=constatnts.StudentRole;
+            } else {
+                command="getAllEmployeeAttendance";
+                strStandardID="0";
+                strDivisionId="0";
+                role=constatnts.TeacherRole;
             }
             appUtils.showProgressbar(context);
-            Call<StudentAttendanceDetailResponse> call = ApiService.buildService(context).getStudentAttendanceDatewise(strAuth,command,constatnts.StudentRole,"0",strSchoolId,strAcademicId,strDivisionId,strAcademicId,strUserId);
+            Call<StudentAttendanceDetailResponse> call = ApiService.buildService(context).getStudentAttendanceDatewise(strAuth,command,role,"0",strSchoolId,strAcademicId,strDivisionId,strStandardID,strUserId);
             call.enqueue(new Callback<StudentAttendanceDetailResponse>() {
                 @Override
                 public void onResponse(Call<StudentAttendanceDetailResponse> call, Response<StudentAttendanceDetailResponse> response) {

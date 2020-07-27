@@ -92,6 +92,7 @@ public class StudentHomeFragment extends Fragment {
     @BindView(R.id.linearfour)
     LinearLayout linearfour;
 
+
     @BindView(R.id.lineartab)
     LinearLayout lineartab;
     @BindView(R.id.relself)
@@ -115,7 +116,7 @@ public class StudentHomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mview=inflater.inflate(R.layout.fragment_home,null);
+        mview=inflater.inflate(R.layout.student_home_fragment,null);
         ButterKnife.bind(this,mview);
         context= getActivity();
         appUtils=new AppUtils();
@@ -131,10 +132,8 @@ public class StudentHomeFragment extends Fragment {
     }
 
     private void setAllOption() {
-
             lineartab.setVisibility(View.GONE);
             linearfour.setVisibility(View.VISIBLE);
-
             imageView1.setImageResource(R.drawable.home_attendance);
             textview1.setText("Attendance");
             imageView2.setImageResource(R.drawable.home_classes);
@@ -233,6 +232,9 @@ public class StudentHomeFragment extends Fragment {
                 break;
             case R.id.cardView1:
                 SelfAttendanceFragment fragment = new SelfAttendanceFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("isEmployeeSelf","False");
+                fragment.setArguments(bundle);
                 animation(fragment);
                 break;
             case R.id.cardView2:
@@ -248,7 +250,8 @@ public class StudentHomeFragment extends Fragment {
                 animation(holidayFragment);
                 break;
             case R.id.cardView5:
-
+                OnlineLecFragment onlineLecFragment = new OnlineLecFragment();
+                animation(onlineLecFragment);
                 break;
             case R.id.cardView6:
                 AssignmentFragment assignmentFragment = new AssignmentFragment();
@@ -259,7 +262,8 @@ public class StudentHomeFragment extends Fragment {
                 animation(classExamTimeTableFragment);
                 break;
             case R.id.cardView8:
-
+                OnlineExamFragment onlineExamFragment=new OnlineExamFragment();
+                animation(onlineExamFragment);
                 break;
         }
     }

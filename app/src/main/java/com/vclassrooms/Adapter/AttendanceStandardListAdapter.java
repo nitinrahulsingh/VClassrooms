@@ -18,11 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
+import com.vclassrooms.Entity.OnlineLectureDetailsResponse;
 import com.vclassrooms.Entity.StandardDivisionResponse;
 import com.vclassrooms.Fragment.AssignmentFragment;
 import com.vclassrooms.Fragment.ClassExamTimeTableFragment;
 import com.vclassrooms.Fragment.ClassTimeTableFragment;
+import com.vclassrooms.Fragment.E_BooksFragment;
 import com.vclassrooms.Fragment.MarkAttendanceFragment;
+import com.vclassrooms.Fragment.OnlineExamFragment;
+import com.vclassrooms.Fragment.OnlineLecFragment;
 import com.vclassrooms.Fragment.StudentListStandardWiseFragment;
 import com.vclassrooms.R;
 
@@ -102,6 +106,15 @@ public class AttendanceStandardListAdapter extends RecyclerView.Adapter<Attendan
             case "Assignment":
                 viewHolde.imgMarkClassAttendance.setVisibility(View.GONE);
                 break;
+            case "OnlineExam":
+                viewHolde.imgMarkClassAttendance.setVisibility(View.GONE);
+                break;
+            case "OnlineLec":
+                viewHolde.imgMarkClassAttendance.setVisibility(View.GONE);
+                break;
+            case "EBook":
+                viewHolde.imgMarkClassAttendance.setVisibility(View.GONE);
+                break;
             default:
                 break;
         }
@@ -173,6 +186,36 @@ public class AttendanceStandardListAdapter extends RecyclerView.Adapter<Attendan
                 bundle.putString("StandardID", String.valueOf(mStandardDataList.get(position).getStandardId()));
                 assignmentFragment.setArguments(bundle);
                 appUtils.onAddFragment(activity, assignmentFragment,R.id.fragment_mainLayout);
+                break;
+            case "OnlineExam":
+                OnlineExamFragment onlineExamFragment = new OnlineExamFragment();
+                bundle=new Bundle();
+                bundle.putString("ClassName", mStandardDataList.get(position).getStandardName()+" ("+
+                        mStandardDataList.get(position).getDivisionName()+")");
+                bundle.putString("DivisionId", String.valueOf(mStandardDataList.get(position).getDivisionId()));
+                bundle.putString("StandardID", String.valueOf(mStandardDataList.get(position).getStandardId()));
+                onlineExamFragment.setArguments(bundle);
+                appUtils.onAddFragment(activity, onlineExamFragment,R.id.fragment_mainLayout);
+                break;
+            case "OnlineLec":
+                OnlineLecFragment onlineLecFragment = new OnlineLecFragment();
+                bundle=new Bundle();
+                bundle.putString("ClassName", mStandardDataList.get(position).getStandardName()+" ("+
+                        mStandardDataList.get(position).getDivisionName()+")");
+                bundle.putString("DivisionId", String.valueOf(mStandardDataList.get(position).getDivisionId()));
+                bundle.putString("StandardID", String.valueOf(mStandardDataList.get(position).getStandardId()));
+                onlineLecFragment.setArguments(bundle);
+                appUtils.onAddFragment(activity, onlineLecFragment,R.id.fragment_mainLayout);
+                break;
+            case "EBook":
+                E_BooksFragment e_booksFragment = new E_BooksFragment();
+                bundle=new Bundle();
+                bundle.putString("ClassName", mStandardDataList.get(position).getStandardName()+" ("+
+                        mStandardDataList.get(position).getDivisionName()+")");
+                bundle.putString("DivisionId", String.valueOf(mStandardDataList.get(position).getDivisionId()));
+                bundle.putString("StandardID", String.valueOf(mStandardDataList.get(position).getStandardId()));
+                e_booksFragment.setArguments(bundle);
+                appUtils.onAddFragment(activity, e_booksFragment,R.id.fragment_mainLayout);
                 break;
             default:
                 break;

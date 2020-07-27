@@ -1,5 +1,6 @@
 package com.vclassrooms.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,8 +24,11 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.vclassrooms.BottomSheetDialog.AddGalleryImagesBottomSheet;
+import com.vclassrooms.BottomSheetDialog.PhoneCallOptionBottomSheet;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Entity.TeacherDirectoryResponse;
+import com.vclassrooms.Fragment.GalleryFragment;
 import com.vclassrooms.R;
 
 import java.util.List;
@@ -36,6 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TeacherDirectoryAdapter extends RecyclerView.Adapter<TeacherDirectoryAdapter.ViewHolder> {
 
     Context context;
+
     List<TeacherDirectoryResponse.DirectoryeDetail> mStaffDataList;
     LayoutInflater inflter;
     private int row_index = -1;
@@ -63,7 +69,6 @@ public class TeacherDirectoryAdapter extends RecyclerView.Adapter<TeacherDirecto
         }else{
             appUtils.setText(holder.txtMail,mStaffDataList.get(position).getEmailId());
         }
-
         if(TextUtils.isEmpty(mStaffDataList.get(position).getMobileNo())){
             holder.txtMob.setVisibility(View.INVISIBLE);
         }else{
@@ -88,10 +93,21 @@ public class TeacherDirectoryAdapter extends RecyclerView.Adapter<TeacherDirecto
         holder.txtMob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + mStaffDataList.get(position).getMobileNo()));
-                context.startActivity(intent);
-
+                PhoneCallOptionBottomSheet phoneCallOptionBottomSheet = new
+                        PhoneCallOptionBottomSheet();
+                phoneCallOptionBottomSheet.newInstance(mStaffDataList.get(position).getMobileNo(),mStaffDataList.get(position).getEmailId(),mStaffDataList.get(position).getFirstName());
+                phoneCallOptionBottomSheet.show(((AppCompatActivity) context).getSupportFragmentManager(),
+                        "add__dialog_fragment");
+            }
+        });
+        holder.txtMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PhoneCallOptionBottomSheet phoneCallOptionBottomSheet = new
+                        PhoneCallOptionBottomSheet();
+                phoneCallOptionBottomSheet.newInstance(mStaffDataList.get(position).getMobileNo(),mStaffDataList.get(position).getEmailId(),mStaffDataList.get(position).getFirstName());
+                phoneCallOptionBottomSheet.show(((AppCompatActivity) context).getSupportFragmentManager(),
+                        "add__dialog_fragment");
             }
         });
         if(mStaffDataList.get(position).getImageURL()!=null) {

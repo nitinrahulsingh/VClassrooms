@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -294,14 +295,19 @@ public class AppUtils {
      * @return converted date
      */
     public  String convertDateFormat(String sourceFormat, String outputFormat, String date) {
-        SimpleDateFormat source = new SimpleDateFormat(sourceFormat, Locale.US);
-        SimpleDateFormat output = new SimpleDateFormat(outputFormat, Locale.US);
-        try {
-            return output.format(source.parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
+        if(date!=null && !TextUtils.isEmpty(date)){
+            SimpleDateFormat source = new SimpleDateFormat(sourceFormat, Locale.US);
+            SimpleDateFormat output = new SimpleDateFormat(outputFormat, Locale.US);
+            try {
+                return output.format(source.parse(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }else {
+            return "";
         }
+
     }
 
     /**
@@ -746,5 +752,31 @@ public class AppUtils {
         int DayCount= (int) (dayCount+1);
 
         return DayCount;
+    }
+
+    public static String formatSize(float size) {
+        String suffix = null;
+
+        if (size >= 1024) {
+            suffix = "KB";
+            size /= 1024;
+            if (size >= 1024) {
+                suffix = "MB";
+                size /= 1024;
+                if (size >= 1024) {
+                    suffix = "GB";
+                    size /= 1024;
+                }
+            }
+        }
+
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+
+        StringBuilder resultBuffer = new StringBuilder(df.format(size));
+
+//
+        if (suffix != null) resultBuffer.append(suffix);
+        return resultBuffer.toString();
     }
 }

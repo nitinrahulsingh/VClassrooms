@@ -24,6 +24,7 @@ import com.vclassrooms.Adapter.ExpandableListAdapter;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
 import com.vclassrooms.Fragment.AdminHomeFragment;
+import com.vclassrooms.Fragment.AnnouncementFragment;
 import com.vclassrooms.Fragment.ChangePasswordFragment;
 import com.vclassrooms.Fragment.E_BooksFragment;
 import com.vclassrooms.Fragment.GalleryFragment;
@@ -31,6 +32,7 @@ import com.vclassrooms.Fragment.ParentProfileFragment;
 import com.vclassrooms.Fragment.ParentStudentHomeFragment;
 import com.vclassrooms.Fragment.ProfileFragment;
 import com.vclassrooms.Fragment.StaffDirectoryFragment;
+import com.vclassrooms.Fragment.StandardDivisionListFragment;
 import com.vclassrooms.Fragment.StudentDirecoryFragment;
 import com.vclassrooms.Fragment.StudentHomeFragment;
 import com.vclassrooms.Fragment.TeacherDirectoryFragment;
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawer_layout;
     @BindView(R.id.e_books_relative)
     RelativeLayout e_books_relative;
+    @BindView(R.id.toolAnnounce)
+    RelativeLayout toolAnnounce;
     String strAuth,strRoleid,strUserId,strSchoolId,strAcademicId;
     ActionBarDrawerToggle toggle;
     AppUtils appUtils;
@@ -153,7 +157,24 @@ public class MainActivity extends AppCompatActivity {
             e_books_relative.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new E_BooksFragment()).commitAllowingStateLoss();
+                    if(strRoleid.contentEquals("1")||strRoleid.contentEquals("2")){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new E_BooksFragment()).commitAllowingStateLoss();
+                        drawer_layout.closeDrawer(GravityCompat.START);
+                    }else {
+                        StandardDivisionListFragment standardDivisionListFragment1 = new StandardDivisionListFragment();
+                        Bundle  bundle=new Bundle();
+                        bundle.putString("Module",constatnts.EBook);
+                        standardDivisionListFragment1.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, standardDivisionListFragment1).commitAllowingStateLoss();
+                        drawer_layout.closeDrawer(GravityCompat.START);
+                    }
+
+                }
+            });
+            toolAnnounce.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new AnnouncementFragment()).commitAllowingStateLoss();
                     drawer_layout.closeDrawer(GravityCompat.START);
                 }
             });
@@ -168,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         listDataChild = new HashMap<String, List<String>>();
 
         listDataHeader.add(getString(R.string.Home));
-        listDataHeader.add(getString(R.string.dashboard));
+     //  listDataHeader.add(getString(R.string.dashboard));
         listDataHeader.add(getString(R.string.directory));
         listDataHeader.add(getString(R.string.Profile));
         listDataHeader.add(getString(R.string.gallery));
@@ -194,12 +215,12 @@ public class MainActivity extends AppCompatActivity {
         List<String> homeLogout = new ArrayList<String>();
 
         listDataChild.put(listDataHeader.get(0), homeChild);
-        listDataChild.put(listDataHeader.get(1), dashboardChild);
-        listDataChild.put(listDataHeader.get(2), directoriesChild);
-        listDataChild.put(listDataHeader.get(3), profileChild);
-        listDataChild.put(listDataHeader.get(4), galleryChild);
-        listDataChild.put(listDataHeader.get(5), settingChild);
-        listDataChild.put(listDataHeader.get(6), homeLogout);
+        //listDataChild.put(listDataHeader.get(1), dashboardChild);
+        listDataChild.put(listDataHeader.get(1), directoriesChild);
+        listDataChild.put(listDataHeader.get(2), profileChild);
+        listDataChild.put(listDataHeader.get(3), galleryChild);
+        listDataChild.put(listDataHeader.get(4), settingChild);
+        listDataChild.put(listDataHeader.get(5), homeLogout);
 
 
     }
@@ -268,10 +289,12 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ParentStudentHomeFragment()).commitAllowingStateLoss();
                         drawer_layout.closeDrawer(GravityCompat.START);
                     }
-                } else if (listDataHeader.get(groupPosition).contentEquals(getString(R.string.dashboard))) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new AdminHomeFragment()).commitAllowingStateLoss();
-                    drawer_layout.closeDrawer(GravityCompat.START);
-                } else if (listDataHeader.get(groupPosition).contentEquals(getString(R.string.Profile))) {
+                }
+//                else if (listDataHeader.get(groupPosition).contentEquals(getString(R.string.dashboard))) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new AdminHomeFragment()).commitAllowingStateLoss();
+//                    drawer_layout.closeDrawer(GravityCompat.START);
+//                }
+                else if (listDataHeader.get(groupPosition).contentEquals(getString(R.string.Profile))) {
                     if(strRoleid.contentEquals("1")){
                         //parent
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ParentProfileFragment()).commitAllowingStateLoss();

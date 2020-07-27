@@ -12,10 +12,6 @@
         android:background="@color/white">
 
 
-        <com.vclassrooms.Common.CustomSwipeToRefresh
-            android:id="@+id/classesSwipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <androidx.core.widget.NestedScrollView
                 android:background="@color/gray_100"
@@ -251,7 +247,7 @@
 
             </androidx.core.widget.NestedScrollView>
 
-        </com.vclassrooms.Common.CustomSwipeToRefresh>
+
 
         <TextView
             android:id="@+id/txt_no_Internet"

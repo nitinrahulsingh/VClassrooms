@@ -31,6 +31,7 @@ import com.vclassrooms.Entity.AttendanceDetail;
 import com.vclassrooms.Entity.AssignmentResponse;
 import com.vclassrooms.Entity.ExamTimeTableResponse;
 import com.vclassrooms.Entity.StudentListResponse;
+import com.vclassrooms.Interface.CommonInterface;
 import com.vclassrooms.R;
 import com.vclassrooms.Retrofit.ApiService;
 import com.vclassrooms.photopicker.activity.PickImageActivity;
@@ -49,7 +50,7 @@ import retrofit2.Response;
 /**
  * Created by Rahul on 11,July,2020
  */
-public class AssignmentFragment extends Fragment {
+public class AssignmentFragment extends Fragment implements CommonInterface {
     View mview;
     AppUtils appUtils;
     Constatnts constatnts;
@@ -61,7 +62,7 @@ public class AssignmentFragment extends Fragment {
     RelativeLayout relAdd;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
-      @BindView(R.id.txt_no_data)
+    @BindView(R.id.txt_no_data)
     TextView txt_no_data;
     @BindView(R.id.edtSearch)
     EditText edtSearch;
@@ -94,13 +95,7 @@ public class AssignmentFragment extends Fragment {
         strUserId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERID);
         strSchoolId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_SCHOOLID);
         strAcademicId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_ACADEMICYEAR);
-        if(strRoleid.contentEquals("3")){
-            relAdd.setVisibility(View.VISIBLE);
-            strClassName=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDNAME)+" ("
-                    +appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONNAME)+")";
-            strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
-            strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
-        }else if(strRoleid.contentEquals("2")){
+        if(strRoleid.contentEquals("2")){
             relAdd.setVisibility(View.GONE);
             strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
             strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
@@ -109,7 +104,8 @@ public class AssignmentFragment extends Fragment {
             strClassName=getArguments().getString("ClassName");
             strDivisionId=getArguments().getString("DivisionId");
             strStandardID=getArguments().getString("StandardID");
-        }edtSearch.setHint("Search Assignment");
+        }
+        edtSearch.setHint("Search Assignment");
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -176,6 +172,7 @@ public class AssignmentFragment extends Fragment {
             case R.id.relAdd:
                 AddAssignmentBottomSheet degree_bottomSheetFragment = new
                         AddAssignmentBottomSheet();
+                degree_bottomSheetFragment.newInstance(AssignmentFragment.this);
                 degree_bottomSheetFragment.show(getActivity().getSupportFragmentManager(),
                         "add__dialog_fragment");
                 break;
@@ -235,4 +232,8 @@ public class AssignmentFragment extends Fragment {
         }
     }
 
+    @Override
+    public void OnCommonInterfaceClick(int id, boolean isAdded) {
+        getAssignmentListApi();
+    }
 }

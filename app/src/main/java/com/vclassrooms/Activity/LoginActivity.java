@@ -20,6 +20,7 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.vclassrooms.Common.AppUtils;
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        FirebaseApp.initializeApp(this);
         firebaseAnalytics = FirebaseAnalytics.getInstance(LoginActivity.this);
         context= LoginActivity.this;
         appUtils=new AppUtils();

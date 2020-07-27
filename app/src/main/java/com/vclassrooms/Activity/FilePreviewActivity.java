@@ -22,7 +22,10 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.vclassrooms.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Rahul on 10,July,2020
@@ -36,8 +39,7 @@ public class FilePreviewActivity extends AppCompatActivity implements View.OnCli
     TextView txtTitle;
     ImageView imgView_Back_arrow, imgView_download, imgView_reload;
     ProgressBar progressBars;
-    private String PreUrl = "https://docs.google.com/viewer?embedded=true&url=";
-    String strPath = "", strExtension = "", strName = "", strPostdate = "";
+    String strPath = "", strName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,7 @@ public class FilePreviewActivity extends AppCompatActivity implements View.OnCli
 
         if (bundle != null) {
             strPath = bundle.getString("path");
-            strExtension = bundle.getString("extension");
             strName = bundle.getString("name");
-            strPostdate = bundle.getString("postdate");
         }
 
         imgView_Back_arrow = (ImageView) findViewById(R.id.imgView_Back_arrow);
@@ -74,20 +74,7 @@ public class FilePreviewActivity extends AppCompatActivity implements View.OnCli
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
-
-        if (strExtension.equalsIgnoreCase(".pdf")) {
-            webView.loadUrl(PreUrl + strPath);
-        } else if (strExtension.equalsIgnoreCase(".jpeg")) {
-            webView.loadUrl(strPath);
-        } else if (strExtension.equalsIgnoreCase(".jpg")) {
-            webView.loadUrl(strPath);
-        } else if (strExtension.equalsIgnoreCase(".png")) {
-            webView.loadUrl(strPath);
-        } else if (strExtension.equalsIgnoreCase(".rpt")) {
-            webView.loadUrl(PreUrl + strPath);
-        } else {
-            webView.loadUrl(PreUrl + strPath);
-        }
+        webView.loadUrl("http://docs.google.com/gview?embedded=true&url="+strPath);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -111,16 +98,14 @@ public class FilePreviewActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void downloadStudyMAterial(String material, String date,
-                                       String extension, String filesItemName) {
-        Log.d(TAG, material + " " + date + " " + extension + " " + " " + filesItemName);
+    private void downloadStudyMAterial(String material, String filesItemName) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(material));
         request.setDescription(getString(R.string.your_dowloads_will_be_available_soon));
         request.setTitle(filesItemName + " " +getString(R.string.file_dowloads));
         // in order for this if to run, you must use the android 3.2 to compile your app
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "VClassrooms" + "/" + filesItemName + "_" + date + extension);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "VClassrooms" + "/" + filesItemName + "_" + filesItemName);
         // get download service and enqueue file
         DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         long refid = manager.enqueue(request);
@@ -153,7 +138,7 @@ public class FilePreviewActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onPermissionGranted() {
 
-                downloadStudyMAterial(strPath, strPostdate, strExtension, strName);
+                downloadStudyMAterial(strPath, strName);
 
             }
             @Override

@@ -93,6 +93,8 @@ public class TeacherHomeFragment extends Fragment {
 
     @BindView(R.id.linearfour)
     LinearLayout linearfour;
+    @BindView(R.id.linearFive)
+    LinearLayout linearFive;
 
     @BindView(R.id.lineartab)
     LinearLayout lineartab;
@@ -123,48 +125,23 @@ public class TeacherHomeFragment extends Fragment {
         context= getActivity();
         appUtils=new AppUtils();
         constatnts=new Constatnts();
+        linearFive.setVisibility(View.GONE);
+
         init();
+
         return mview;
     }
 
     private void init() {
         strUserTypeID=appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERTYPEID);
         setAllOption();
-        relself.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isSelfTab=true;
-                lineartab.setVisibility(View.VISIBLE);
-                cardView6.setVisibility(View.VISIBLE);
-                linearfour.setVisibility(View.GONE);
-                imageView1.setImageResource(R.drawable.home_attendance);
-                textview1.setText("Attendance");
-                imageView2.setImageResource(R.drawable.home_classes);
-                textview2.setText("My Classes");
-                imageView3.setImageResource(R.drawable.home_classes);
-                textview3.setText("Leave");
-                imageView4.setImageResource(R.drawable.e_study);
-                textview4.setText("Tutorial");
-                imageView5.setImageResource(R.drawable.e_study);
-                textview5.setText("E-Books");
-                imageView6.setImageResource(R.drawable.e_study);
-                textview6.setText("Assignments");
-
-                selfTxt.setTypeface(Typeface.DEFAULT);
-                selfTxt.setTextColor(context.getResources().getColor(R.color.gray_300));
-                teacherTxt.setTextColor(context.getResources().getColor(R.color.colorGrey));
-
-//            selfImg.setImageResource(R.drawable.teacher_grayicon);
-//            TeacherImg.setImageResource(R.drawable.teacher_grayicon);
-            }
-        });
         relTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isSelfTab=false;
                 lineartab.setVisibility(View.VISIBLE);
-                cardView6.setVisibility(View.GONE);
                 linearfour.setVisibility(View.GONE);
+                cardView6.setVisibility(View.VISIBLE);
                 imageView1.setImageResource(R.drawable.home_calender);
                 textview1.setText("Attendance");
                 imageView2.setImageResource(R.drawable.home_classes);
@@ -175,7 +152,8 @@ public class TeacherHomeFragment extends Fragment {
                 textview4.setText("Exam Timetable");
                 imageView5.setImageResource(R.drawable.e_study);
                 textview5.setText("Online Exam");
-
+                imageView6.setImageResource(R.drawable.home_classes);
+                textview6.setText("My Classes");
 
                 selfTxt.setTypeface(Typeface.DEFAULT);
                 selfTxt.setTextColor(context.getResources().getColor(R.color.colorGrey));
@@ -185,14 +163,42 @@ public class TeacherHomeFragment extends Fragment {
 //            TeacherImg.setImageResource(R.drawable.teacher_grayicon);
             }
         });
+        relself.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isSelfTab=true;
+                lineartab.setVisibility(View.VISIBLE);
+                linearfour.setVisibility(View.GONE);
+                cardView6.setVisibility(View.GONE);
+                imageView1.setImageResource(R.drawable.home_attendance);
+                textview1.setText("Attendance");
+                imageView2.setImageResource(R.drawable.home_classes);
+                textview2.setText("My Classes");
+                imageView3.setImageResource(R.drawable.home_classes);
+                textview3.setText("Leave");
+                imageView4.setImageResource(R.drawable.e_study);
+                textview4.setText("E-Books");
+                imageView5.setImageResource(R.drawable.e_study);
+                textview5.setText("Assignments");
+
+                selfTxt.setTypeface(Typeface.DEFAULT);
+                selfTxt.setTextColor(context.getResources().getColor(R.color.gray_300));
+                teacherTxt.setTextColor(context.getResources().getColor(R.color.colorGrey));
+
+//            selfImg.setImageResource(R.drawable.teacher_grayicon);
+//            TeacherImg.setImageResource(R.drawable.teacher_grayicon);
+            }
+        });
+
     }
 
     private void setAllOption() {
         if(strUserTypeID.contentEquals("3")){
             //Teacher
+            boolean isSelfTab=true;
             linearfour.setVisibility(View.GONE);
+            cardView6.setVisibility(View.GONE);
             lineartab.setVisibility(View.VISIBLE);
-            cardView6.setVisibility(View.VISIBLE);
             imageView1.setImageResource(R.drawable.home_attendance);
             textview1.setText("Attendance");
             imageView2.setImageResource(R.drawable.home_classes);
@@ -200,11 +206,9 @@ public class TeacherHomeFragment extends Fragment {
             imageView3.setImageResource(R.drawable.home_classes);
             textview3.setText("Leave");
             imageView4.setImageResource(R.drawable.e_study);
-            textview4.setText("Tutorial");
+            textview4.setText("E-Books");
             imageView5.setImageResource(R.drawable.e_study);
-            textview5.setText("E-Books");
-            imageView6.setImageResource(R.drawable.e_study);
-            textview6.setText("Assignments");
+            textview5.setText("Assignments");
 
             selfTxt.setTypeface(Typeface.DEFAULT);
             selfTxt.setTextColor(context.getResources().getColor(R.color.gray_300));
@@ -292,12 +296,20 @@ public class TeacherHomeFragment extends Fragment {
     @OnClick({R.id.cardView1,R.id.cardView2,R.id.cardView3,R.id.cardView4,R.id.cardView5,R.id.cardView6})
     public void onClick(View v) {
         Bundle bundle;
+        if(cardView6.getVisibility()==View.VISIBLE){
+            isSelfTab=false;
+        }else {
+            isSelfTab=true;
+        }
         switch (v.getId()) {
             default:
                 break;
             case R.id.cardView1:
                 if(isSelfTab){
                     SelfAttendanceFragment fragment = new SelfAttendanceFragment();
+                    bundle=new Bundle();
+                    bundle.putString("isEmployeeSelf","True");
+                    fragment.setArguments(bundle);
                     animation(fragment);
                 }else {
                     StandardDivisionListFragment fragment = new StandardDivisionListFragment();
@@ -310,10 +322,14 @@ public class TeacherHomeFragment extends Fragment {
                 break;
             case R.id.cardView2:
                 if(isSelfTab){
-
-                }else {
-                    ClassTimeTableFragment classTimeTableFragment = new ClassTimeTableFragment();
+                    TeacherTimeTable classTimeTableFragment = new TeacherTimeTable();
                     animation(classTimeTableFragment);
+                }else {
+                    StandardDivisionListFragment fragment = new StandardDivisionListFragment();
+                    bundle=new Bundle();
+                    bundle.putString("Module",constatnts.OnlineLec);
+                    fragment.setArguments(bundle);
+                    animation(fragment);
                 }
                 break;
             case R.id.cardView3:
@@ -327,7 +343,11 @@ public class TeacherHomeFragment extends Fragment {
                 break;
             case R.id.cardView4:
                 if (isSelfTab){
-
+                    StandardDivisionListFragment standardDivisionListFragment2 = new StandardDivisionListFragment();
+                    bundle=new Bundle();
+                    bundle.putString("Module",constatnts.EBook);
+                    standardDivisionListFragment2.setArguments(bundle);
+                    animation(standardDivisionListFragment2);
                 }else {
                     StandardDivisionListFragment standardDivisionListFragment2 = new StandardDivisionListFragment();
                     bundle=new Bundle();
@@ -338,17 +358,28 @@ public class TeacherHomeFragment extends Fragment {
                 break;
             case R.id.cardView5:
                 if (isSelfTab){
-
+                    StandardDivisionListFragment fragment = new StandardDivisionListFragment();
+                    bundle=new Bundle();
+                    bundle.putString("Module",constatnts.Assignment);
+                    fragment.setArguments(bundle);
+                    animation(fragment);
                 }else {
-
+                    StandardDivisionListFragment fragment = new StandardDivisionListFragment();
+                    bundle=new Bundle();
+                    bundle.putString("Module",constatnts.OnlineExam);
+                    fragment.setArguments(bundle);
+                    animation(fragment);
                 }
                 break;
             case R.id.cardView6:
                 if (isSelfTab){
-                    AssignmentFragment assignmentFragment = new AssignmentFragment();
-                    animation(assignmentFragment);
-                }else {
 
+                }else {
+                    StandardDivisionListFragment fragment = new StandardDivisionListFragment();
+                    bundle=new Bundle();
+                    bundle.putString("Module",constatnts.ClassTimetable);
+                    fragment.setArguments(bundle);
+                    animation(fragment);
                 }
                 break;
         }

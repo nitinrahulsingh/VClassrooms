@@ -90,4 +90,7 @@ dependencies {
     // Add the SDK for Firebase Cloud Messaging
     implementation 'com.google.firebase:firebase-messaging:20.2.3'
 
+    implementation 'com.google.android.gms:play-services-vision:20.0.0'
+
 }
+apply plugin: 'com.google.gms.google-services'

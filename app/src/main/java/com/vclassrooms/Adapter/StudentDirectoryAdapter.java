@@ -124,7 +124,6 @@ public class StudentDirectoryAdapter extends RecyclerView.Adapter<StudentDirecto
 
                     }
                 });
-
                 if (mStudentDataList.get(position).isExpand()) {
                     viewHolder.linearChild.setVisibility(View.VISIBLE);
 

@@ -118,18 +118,13 @@ public class StudentListStandardWiseFragment extends Fragment {
         strAcademicId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_ACADEMICYEAR);
         if(strRoleid.contentEquals("3")){
             relStdDate.setVisibility(View.GONE);
-            textViewChangeclass.setVisibility(View.GONE);
-            strClassName=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDNAME)+" ("
-                    +appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONNAME)+")";
-            strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
-            strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
         }else {
             relStdDate.setVisibility(View.VISIBLE);
             textViewChangeclass.setVisibility(View.VISIBLE);
-            strClassName=getArguments().getString("ClassName");
-            strDivisionId=getArguments().getString("DivisionId");
-            strStandardID=getArguments().getString("StandardID");
         }
+        strClassName=getArguments().getString("ClassName");
+        strDivisionId=getArguments().getString("DivisionId");
+        strStandardID=getArguments().getString("StandardID");
         txt_standard.setText("Class:"+strClassName);
         mLayoutManager = new LinearLayoutManager(context);
         recyclerview.setLayoutManager(mLayoutManager);
@@ -241,6 +236,8 @@ public class StudentListStandardWiseFragment extends Fragment {
                                                 studentLists.get(position).getDivisionName()+")");
                                         bundle.putString("DivisionId",strDivisionId);
                                         bundle.putString("StandardID", strStandardID);
+                                        bundle.putString("UserId", studentLists.get(position).getStudentId().toString());
+                                        bundle.putString("isEmployeeSelf","False");
                                         fragment.setArguments(bundle);
                                         appUtils.onAddFragment(getActivity(), fragment,R.id.fragment_mainLayout);
                                     }

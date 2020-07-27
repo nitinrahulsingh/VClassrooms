@@ -25,6 +25,7 @@ import com.vclassrooms.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.http.Body;
 
 /**
  * Created by Rahul on 08,July,2020
@@ -257,6 +258,9 @@ public class ParentStudentHomeFragment extends Fragment {
                 break;
             case R.id.cardView1:
                 SelfAttendanceFragment fragment = new SelfAttendanceFragment();
+               Bundle bundle=new Bundle();
+                bundle.putString("isEmployeeSelf","false");
+                fragment.setArguments(bundle);
                 animation(fragment);
                 break;
             case R.id.cardView2:

@@ -46,7 +46,9 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.FilePreviewActivity" />
+        <activity android:name=".Activity.FilePreviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".photopicker.activity.PickImageActivity"
             android:screenOrientation="portrait" />

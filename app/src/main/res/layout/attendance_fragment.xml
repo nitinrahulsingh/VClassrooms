@@ -25,11 +25,7 @@
 
 
 
-        <com.vclassrooms.Common.CustomSwipeToRefresh
-            android:id="@+id/myClassesSwipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/btnSubmit">
+
 
             <!--<android.support.v4.widget.NestedScrollView-->
             <!--android:id="@+id/myClassesNested"-->
@@ -170,7 +166,7 @@
             </RelativeLayout>
 
 
-        </com.vclassrooms.Common.CustomSwipeToRefresh>
+
 
         <TextView
             android:id="@+id/txt_no_Internet"

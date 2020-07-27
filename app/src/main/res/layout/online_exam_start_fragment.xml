@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/bottom_sheet_bg"
+        android:layout_height="match_parent">
+<RelativeLayout
+    android:visibility="gone"
+    android:id="@+id/startexam_relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:visibility="visible"
+        android:id="@+id/start_txt"
+        android:textSize="@dimen/_16sdp"
+        android:text="Start"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
+
+
+            <LinearLayout
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:padding="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:visibility="visible"
+                        android:textAlignment="viewStart"
+                        android:id="@+id/ttquestion_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="Total:Q1"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <TextView
+                        android:visibility="visible"
+                        android:layout_alignParentEnd="true"
+                        android:textAlignment="viewEnd"
+                        android:id="@+id/time_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="Time:"
+                        android:textColor="@color/gray_1100"
+                        android:textSize="@dimen/_14sdp" />
+                </RelativeLayout>
+
+                <View
+                    android:background="@color/gray_400"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnSubmit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/button_selector_round_color"
+                            android:fontFamily="@font/proxima_nova"
+                            android:text="Submit"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+
+            </LinearLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

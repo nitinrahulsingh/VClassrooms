@@ -178,10 +178,7 @@
             android:orientation="vertical"
             >
 
-            <com.vclassrooms.Common.CustomSwipeToRefresh
-                android:id="@+id/Swipe_toRefresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/dir_RecyclerView"
                     android:layout_width="match_parent"
@@ -194,7 +191,7 @@
                     tools:listitem="@layout/recycler_item_student_directory"
                     android:background="@color/gray_100"
                     />
-            </com.vclassrooms.Common.CustomSwipeToRefresh>
+
 
         </LinearLayout>
     </LinearLayout>

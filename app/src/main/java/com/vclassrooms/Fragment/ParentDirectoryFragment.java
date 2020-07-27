@@ -19,11 +19,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vclassrooms.Adapter.ChildDirectoryAdapter;
 import com.vclassrooms.Adapter.ParentDirectoryAdapter;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
-import com.vclassrooms.Common.CustomSwipeToRefresh;
 import com.vclassrooms.Entity.ParentDirectoryResponse;
 import com.vclassrooms.Entity.StudentDetails;
 import com.vclassrooms.Entity.StudentDirectoryResponse;
@@ -56,8 +54,7 @@ public class ParentDirectoryFragment extends Fragment implements  ParentDirector
     TextView heading_tv;
     @BindView(R.id.dir_RecyclerView)
     RecyclerView dir_RecyclerView;
-    @BindView(R.id.Swipe_toRefresh)
-    CustomSwipeToRefresh Swipe_toRefresh;
+
     @BindView(R.id.edtSearchStudent)
     EditText edtSearchStudent;
     @BindView(R.id.searchClose)

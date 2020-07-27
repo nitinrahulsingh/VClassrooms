@@ -194,16 +194,16 @@ public class MarkAttendanceFragment extends Fragment implements DatePickerDialog
         strUserId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERID);
         strSchoolId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_SCHOOLID);
         strAcademicId = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_ACADEMICYEAR);
-        if(strRoleid.contentEquals("3")){
-            strClassName=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDNAME)+" ("
-                    +appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONNAME)+")";
-            strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
-            strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
-        }else {
+//        if(strRoleid.contentEquals("3")){
+//            strClassName=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDNAME)+" ("
+//                    +appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONNAME)+")";
+//            strDivisionId=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_DIVISIONID);
+//            strStandardID=appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_STANDARDID);
+//        }else {
             strClassName=getArguments().getString("ClassName");
             strDivisionId=getArguments().getString("DivisionId");
             strStandardID=getArguments().getString("StandardID");
-        }
+//        }
         appUtils.setText(txt_standard,strClassName);
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -255,7 +255,7 @@ public class MarkAttendanceFragment extends Fragment implements DatePickerDialog
             }
             strDateSelected=appUtils.convertDateFormat("dd/MM/yyyy","yyyy/MM/dd",strDateSelected);
             appUtils.showProgressbar(context);
-            Call<StudentAttendanceDetailResponse> call = ApiService.buildService(context).getStudentAttendanceDatewise(strAuth,"getAllStudentAttendance",constatnts.StudentRole, strDateSelected,strSchoolId,strAcademicId,strDivisionId,strAcademicId,strUserId);
+            Call<StudentAttendanceDetailResponse> call = ApiService.buildService(context).getStudentAttendanceDatewise(strAuth,"getAllStudentAttendance",constatnts.StudentRole, strDateSelected,strSchoolId,strAcademicId,strDivisionId,strStandardID,strUserId);
             call.enqueue(new Callback<StudentAttendanceDetailResponse>() {
                 @Override
                 public void onResponse(Call<StudentAttendanceDetailResponse> call, Response<StudentAttendanceDetailResponse> response) {

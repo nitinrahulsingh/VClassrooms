@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.vclassrooms.BottomSheetDialog.AddOnlineExamQuestionBottomSheet;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
 import com.vclassrooms.R;
@@ -52,6 +53,10 @@ public class AdminHomeFragment extends Fragment {
     CardView cardView7;
     @BindView(R.id.cardView8)
     CardView cardView8;
+    @BindView(R.id.cardView9)
+    CardView cardView9;
+    @BindView(R.id.cardView10)
+    CardView cardView10;
 
     //All Imageview
     @BindView(R.id.imageView1)
@@ -70,6 +75,10 @@ public class AdminHomeFragment extends Fragment {
     ImageView imageView7;
     @BindView(R.id.imageView8)
     ImageView imageView8;
+    @BindView(R.id.imageView9)
+    ImageView imageView9;
+    @BindView(R.id.imageView10)
+    ImageView imageView10;
 
     //All Textview
     @BindView(R.id.textview1)
@@ -88,9 +97,15 @@ public class AdminHomeFragment extends Fragment {
     TextView textview7;
     @BindView(R.id.textview8)
     TextView textview8;
+    @BindView(R.id.textview9)
+    TextView textview9;
+    @BindView(R.id.textview10)
+    TextView textview10;
 
     @BindView(R.id.linearfour)
     LinearLayout linearfour;
+    @BindView(R.id.linearFive)
+    LinearLayout linearFive;
 
     @BindView(R.id.lineartab)
     LinearLayout lineartab;
@@ -122,6 +137,7 @@ public class AdminHomeFragment extends Fragment {
         appUtils=new AppUtils();
         constatnts=new Constatnts();
         init();
+        cardView10.setVisibility(View.GONE);
         return mview;
     }
 
@@ -151,6 +167,11 @@ public class AdminHomeFragment extends Fragment {
             textview7.setText("ExamTimetable");
             imageView8.setImageResource(R.drawable.e_study);
             textview8.setText("Online Exam");
+
+            imageView9.setImageResource(R.drawable.e_study);
+            textview9.setText("Teacher Attendance");
+            imageView10.setImageResource(R.drawable.e_study);
+            textview10.setText("Noticeboard");
 
         }
     }
@@ -185,6 +206,10 @@ public class AdminHomeFragment extends Fragment {
                 .playOn(cardView7);
         YoYo.with(Techniques.ZoomOut)
                 .playOn(cardView8);
+        YoYo.with(Techniques.ZoomOut)
+                .playOn(cardView9);
+        YoYo.with(Techniques.ZoomOut)
+                .playOn(cardView10);
 
 
         YoYo.with(Techniques.SlideOutLeft)
@@ -203,6 +228,10 @@ public class AdminHomeFragment extends Fragment {
                 .playOn(cardView7);
         YoYo.with(Techniques.SlideOutRight)
                 .playOn(cardView8);
+        YoYo.with(Techniques.SlideOutRight)
+                .playOn(cardView9);
+        YoYo.with(Techniques.SlideOutRight)
+                .playOn(cardView10);
         //transitionActivityDelay(fragment);
         transitionActivity(fragment);
     }
@@ -228,7 +257,8 @@ public class AdminHomeFragment extends Fragment {
         }, 730);
 
     }
-    @OnClick({R.id.cardView1,R.id.cardView2,R.id.cardView3,R.id.cardView4,R.id.cardView5,R.id.cardView6,R.id.cardView7,R.id.cardView8})
+    @OnClick({R.id.cardView1,R.id.cardView2,R.id.cardView3,R.id.cardView4,R.id.cardView5,R.id.cardView6,R.id.cardView7,R.id.cardView8
+    ,R.id.cardView9,R.id.cardView10})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -256,7 +286,11 @@ public class AdminHomeFragment extends Fragment {
                 animation(holidayFragment);
                 break;
             case R.id.cardView5:
-
+                StandardDivisionListFragment standardDivisionListFragment4 = new StandardDivisionListFragment();
+                bundle=new Bundle();
+                bundle.putString("Module",constatnts.OnlineLec);
+                standardDivisionListFragment4.setArguments(bundle);
+                animation(standardDivisionListFragment4);
                 break;
             case R.id.cardView6:
                 StandardDivisionListFragment standardDivisionListFragment1 = new StandardDivisionListFragment();
@@ -273,7 +307,17 @@ public class AdminHomeFragment extends Fragment {
                 animation(standardDivisionListFragment2);
                 break;
             case R.id.cardView8:
-
+                StandardDivisionListFragment standardDivisionListFragment3 = new StandardDivisionListFragment();
+                bundle=new Bundle();
+                bundle.putString("Module",constatnts.OnlineExam);
+                standardDivisionListFragment3.setArguments(bundle);
+                animation(standardDivisionListFragment3);
+                break;
+            case R.id.cardView9:
+                TeacherListFragment teacherListFragment = new TeacherListFragment();
+                animation(teacherListFragment);
+                break;
+            case R.id.cardView10:
                 break;
         }
     }

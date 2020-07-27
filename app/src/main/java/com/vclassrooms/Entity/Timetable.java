@@ -4,6 +4,8 @@ package com.vclassrooms.Entity;
  * Created by Rahul on 12,July,2020
  */
 public class Timetable {
+
+
         private int Period_Id;
 
         private String SessionName;

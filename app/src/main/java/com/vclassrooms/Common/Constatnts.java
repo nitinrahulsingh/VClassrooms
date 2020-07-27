@@ -37,6 +37,9 @@ public String AttendanceModule = "AttendanceModule";
 public String ClassTimetable = "ClassTimetable";
 public String ExamTimetable = "ExamTimetable";
 public String Assignment = "Assignment";
+public String OnlineExam = "OnlineExam";
+public String OnlineLec = "OnlineLec";
+public String EBook = "EBook";
 
 ///Role
 public String StudentRole = "2";

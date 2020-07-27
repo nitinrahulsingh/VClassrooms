@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vclassrooms.Adapter.StudentDirectoryAdapter;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
-import com.vclassrooms.Common.CustomSwipeToRefresh;
 import com.vclassrooms.Entity.StudentDirectoryResponse;
 import com.vclassrooms.R;
 import com.vclassrooms.Retrofit.ApiService;
@@ -53,8 +52,6 @@ public class StudentDirecoryFragment extends Fragment  {
     TextView heading_tv;
     @BindView(R.id.dir_RecyclerView)
     RecyclerView dir_RecyclerView;
-    @BindView(R.id.Swipe_toRefresh)
-    CustomSwipeToRefresh Swipe_toRefresh;
     @BindView(R.id.edtSearchStudent)
     EditText edtSearchStudent;
     @BindView(R.id.searchClose)

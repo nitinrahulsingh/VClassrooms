@@ -27,6 +27,7 @@ import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
 import com.vclassrooms.Entity.AssignmentResponse;
 import com.vclassrooms.Entity.LeaveDeatailsResponse;
+import com.vclassrooms.Interface.CommonInterface;
 import com.vclassrooms.R;
 import com.vclassrooms.Retrofit.ApiService;
 
@@ -43,7 +44,7 @@ import retrofit2.Response;
 /**
  * Created by Rahul on 18,July,2020
  */
-public class LeaveDetailFragment extends Fragment {
+public class LeaveDetailFragment extends Fragment implements CommonInterface {
     View mview;
     AppUtils appUtils;
     Constatnts constatnts;
@@ -158,6 +159,7 @@ public class LeaveDetailFragment extends Fragment {
             case R.id.relAdd:
                 ApplyLeaveBottomSheet applyLeaveBottomSheet = new
                         ApplyLeaveBottomSheet();
+                applyLeaveBottomSheet.newInstance(LeaveDetailFragment.this);
                 applyLeaveBottomSheet.show(getActivity().getSupportFragmentManager(),
                         "add__dialog_fragment");
                 break;
@@ -218,4 +220,8 @@ public class LeaveDetailFragment extends Fragment {
         }
     }
 
+    @Override
+    public void OnCommonInterfaceClick(int id, boolean isAdded) {
+        getAssignmentListApi();
+    }
 }

@@ -11,10 +11,10 @@
         android:background="@color/gray_100"
         tools:context=".activities.AnnouncementActivity">
 
-        <com.vclassrooms.Common.CustomSwipeToRefresh
-            android:id="@+id/conductSwipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--        <com.vclassrooms.Common.CustomSwipeToRefresh-->
+<!--            android:id="@+id/conductSwipe"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
 
 
@@ -138,7 +138,7 @@
                         android:layoutAnimation="@anim/_layoutanimation"/>
                 </RelativeLayout>
 
-        </com.vclassrooms.Common.CustomSwipeToRefresh>
+<!--        </com.vclassrooms.Common.CustomSwipeToRefresh>-->
 
         <TextView
             android:id="@+id/txt_no_data"
