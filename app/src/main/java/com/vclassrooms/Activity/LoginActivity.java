@@ -50,10 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText edtUsername;
     @BindView(R.id.edtPassword)
     TextInputEditText edtPassword;
-    @BindView(R.id.loginCheckBox)
-    CheckBox loginCheckBox;
-    @BindView(R.id.txtForgotPassword)
-    TextView txtForgotPassword;
+
     @BindView(R.id.btn_Login)
     AppCompatButton btn_Login;
 

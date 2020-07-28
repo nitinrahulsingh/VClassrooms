@@ -19,227 +19,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="2"
             tools:ignore="UselessParent">
 
             <RelativeLayout
                 android:id="@+id/linear"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
                 android:background="@drawable/blue_gradient_bg">
 
                 <RelativeLayout
                     android:id="@+id/linearLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageViewLogo"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_50sdp"
                         android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:src="@drawable/vclassrooms_logo" />
-
-                    <LinearLayout
-                        android:id="@+id/linearForText"
+                        android:id="@+id/imageViewLogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/imageViewLogo"
-                        android:layout_centerHorizontal="true"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
-
-                        <TextView
-                            android:id="@+id/firstImage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/proxima_nova"
-                            android:text="@string/we_have_a"
-                            android:textAlignment="center"
-                            android:textColor="@color/gray_1100"
-                            android:textSize="@dimen/_15sdp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/proxima_nova"
-                            android:text="@string/diocese"
-                            android:textAlignment="center"
-                            android:textColor="@color/gray_1100"
-                            android:textSize="@dimen/_7sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/linearForText"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/circlImageSaint"
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_50sdp"
-                                android:layout_gravity="end"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_30sdp"
-                                android:src="@drawable/saint"
-                                app:civ_border_color="@color/white"
-                                app:civ_border_width="@dimen/_5sdp"
-                                app:civ_circle_background_color="@color/yellow_dark" />
-
-                            <TextView
-                                android:id="@+id/txtLoginSaint"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="end"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:fontFamily="@font/proxima_nova"
-                                android:text="@string/saint_of_day"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_14sdp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/circlImagePrayer"
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_50sdp"
-                                android:layout_marginStart="@dimen/_30sdp"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:src="@drawable/prayer"
-                                app:civ_border_color="@color/white"
-                                app:civ_border_width="@dimen/_5sdp"
-                                app:civ_circle_background_color="@color/yellow_dark" />
-
-                            <TextView
-                                android:id="@+id/txtLoginPrayer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_35sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:fontFamily="@font/proxima_nova"
-                                android:text="@string/prayer"
-                                android:textAlignment="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_14sdp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </LinearLayout>
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:src="@drawable/logo_vclassroom_login" />
 
                 </RelativeLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_marginTop="@dimen/_18sdp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
 
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/circlImageSaint1"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/saint"
-                            app:civ_border_color="@color/white"
-                            app:civ_border_width="@dimen/_5sdp"
-                            app:civ_circle_background_color="@color/yellow_dark" />
-
-
-                        <TextView
-                            android:id="@+id/txtLoginSaint1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/proxima_nova"
-                            android:text="@string/saint_of_day"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_14sdp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/circlImagePrayer1"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:src="@drawable/prayer"
-                            app:civ_border_color="@color/white"
-                            app:civ_border_width="@dimen/_5sdp"
-                            app:civ_circle_background_color="@color/yellow_dark" />
-
-
-                        <TextView
-                            android:id="@+id/txtLoginPrayer1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/proxima_nova"
-                            android:text="@string/prayer"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_14sdp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginTop="@dimen/_30sdp"
                 android:id="@+id/relativeLytAllEdt"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1.1"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:orientation="vertical"
                     android:padding="@dimen/_10sdp">
 
@@ -310,45 +132,13 @@
                             android:singleLine="true"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/loginCheckBox"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/proxima_nova"
-                            android:text="@string/remember_me"
-                            android:textColor="@color/gray_1100"
-                            android:textSize="@dimen/_14sdp" />
-
-                        <TextView
-                            android:id="@+id/txtForgotPassword"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/proxima_nova"
-                            android:gravity="end"
-                            android:text="@string/forgot_password"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/blue"
-                            android:textSize="@dimen/_14sdp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-
-
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_Login"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@color/blue"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/button_selector_round_color"
                         android:fontFamily="@font/proxima_nova"
                         android:text="Login"
                         android:textColor="@color/white"
@@ -371,10 +161,11 @@
     </ScrollView>
 
     <ImageView
+        android:clickable="false"
+        android:alpha=".1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:fitsSystemWindows="true"
         android:scaleType="fitXY"
-        android:background="@drawable/main_image_church" />
+        android:background="@drawable/bg_login" />
 </FrameLayout>

@@ -23,7 +23,9 @@ import android.widget.ImageView;
 import android.widget.OverScroller;
 import android.widget.Scroller;
 
-public class TouchImageView extends ImageView {
+import androidx.appcompat.widget.AppCompatImageView;
+
+public class TouchImageView extends AppCompatImageView {
 
 //	private static final String DEBUG = "DEBUG";
 
