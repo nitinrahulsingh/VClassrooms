@@ -33,7 +33,7 @@ public class ClassTimeTableAdapter extends RecyclerView.Adapter<ClassTimeTableAd
     LayoutInflater inflter;
     ClassTimeTableAdapter.ViewHolder viewHolder;
     private int row_index = -1;
-    ClassTimeTableAdapter.AssignmentDataClick assignmentDataClick;
+    TimetableDataClick timetableDataClick;
     AppUtils appUtils;
     public ClassTimeTableAdapter(Context context, List<Timetable> timetableList) {
         this.context = context;
@@ -41,11 +41,11 @@ public class ClassTimeTableAdapter extends RecyclerView.Adapter<ClassTimeTableAd
 
     }
 
-    public void setOnClickListener(ClassTimeTableAdapter.AssignmentDataClick assignmentDataClick) {
-        this.assignmentDataClick = assignmentDataClick;
+    public void setOnClickListener(TimetableDataClick timetableDataClick) {
+        this.timetableDataClick = timetableDataClick;
     }
-    public interface AssignmentDataClick {
-        void onAssignmentClick(String details, int position);
+    public interface TimetableDataClick {
+        void onTimetableClick(String details, int position);
     }
 
 
@@ -63,15 +63,18 @@ public class ClassTimeTableAdapter extends RecyclerView.Adapter<ClassTimeTableAd
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {
-
                     appUtils.setText(viewHolde.subject_tv,timetableList.get(position).getSubjectName());
                     appUtils.setText(viewHolde.hr_starttv,timetableList.get(position).getStartTime());
                     appUtils.setText(viewHolde.hr_endtv,timetableList.get(position).getEndTime());
                     appUtils.setText(viewHolde.name_txt,timetableList.get(position).getFirst_Name());
-
-
-
-
+                    viewHolde.linear_main.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(timetableDataClick!=null){
+                                timetableDataClick.onTimetableClick(timetableList.get(position).getSubjectName(),position);
+                            }
+                        }
+                    });
             }
         };
         mainHandler.post(myRunnable);

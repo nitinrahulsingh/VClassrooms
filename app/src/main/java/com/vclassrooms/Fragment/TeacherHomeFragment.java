@@ -1,6 +1,7 @@
 package com.vclassrooms.Fragment;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,11 +113,11 @@ public class TeacherHomeFragment extends Fragment {
     TextView teacherTxt;
     @BindView(R.id.imageViewCurve)
     ImageView imageViewCurve;
-    @BindView(R.id.linearPrayerAndSaint)
-    LinearLayout linearPrayerAndSaint;
+
     String strUserTypeID="";
     Fragment currentFragment = null;
     boolean isSelfTab=true;
+    String strModuleName;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -142,25 +143,26 @@ public class TeacherHomeFragment extends Fragment {
                 lineartab.setVisibility(View.VISIBLE);
                 linearfour.setVisibility(View.GONE);
                 cardView6.setVisibility(View.VISIBLE);
-                imageView1.setImageResource(R.drawable.home_calender);
+                imageView1.setImageResource(R.drawable.attendance);
                 textview1.setText("Attendance");
-                imageView2.setImageResource(R.drawable.home_classes);
+                imageView2.setImageResource(R.drawable.online_lec);
                 textview2.setText("Online Lec");
-                imageView3.setImageResource(R.drawable.home_classes);
+                imageView3.setImageResource(R.drawable.event_calender);
                 textview3.setText("Event Calendar");
-                imageView4.setImageResource(R.drawable.e_study);
+                imageView4.setImageResource(R.drawable.examtimetable);
                 textview4.setText("Exam Timetable");
-                imageView5.setImageResource(R.drawable.e_study);
+                imageView5.setImageResource(R.drawable.online_exam);
                 textview5.setText("Online Exam");
-                imageView6.setImageResource(R.drawable.home_classes);
+                imageView6.setImageResource(R.drawable.classes_icon);
                 textview6.setText("My Classes");
 
                 selfTxt.setTypeface(Typeface.DEFAULT);
-                selfTxt.setTextColor(context.getResources().getColor(R.color.colorGrey));
-                teacherTxt.setTextColor(context.getResources().getColor(R.color.gray_300));
+                selfTxt.setTextColor(context.getResources().getColor(R.color.black));
+                teacherTxt.setTextColor(context.getResources().getColor(R.color.blue));
 
-//            selfImg.setImageResource(R.drawable.teacher_grayicon);
-//            TeacherImg.setImageResource(R.drawable.teacher_grayicon);
+                selfImg.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                TeacherImg.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.blue)));
+
             }
         });
         relself.setOnClickListener(new View.OnClickListener() {
@@ -170,23 +172,23 @@ public class TeacherHomeFragment extends Fragment {
                 lineartab.setVisibility(View.VISIBLE);
                 linearfour.setVisibility(View.GONE);
                 cardView6.setVisibility(View.GONE);
-                imageView1.setImageResource(R.drawable.home_attendance);
+                imageView1.setImageResource(R.drawable.attendance);
                 textview1.setText("Attendance");
-                imageView2.setImageResource(R.drawable.home_classes);
+                imageView2.setImageResource(R.drawable.classes_icon);
                 textview2.setText("My Classes");
-                imageView3.setImageResource(R.drawable.home_classes);
+                imageView3.setImageResource(R.drawable.leave_icon);
                 textview3.setText("Leave");
-                imageView4.setImageResource(R.drawable.e_study);
+                imageView4.setImageResource(R.drawable.ebook);
                 textview4.setText("E-Books");
-                imageView5.setImageResource(R.drawable.e_study);
+                imageView5.setImageResource(R.drawable.assignment);
                 textview5.setText("Assignments");
 
                 selfTxt.setTypeface(Typeface.DEFAULT);
-                selfTxt.setTextColor(context.getResources().getColor(R.color.gray_300));
-                teacherTxt.setTextColor(context.getResources().getColor(R.color.colorGrey));
+                selfTxt.setTextColor(context.getResources().getColor(R.color.blue));
+                teacherTxt.setTextColor(context.getResources().getColor(R.color.black));
 
-//            selfImg.setImageResource(R.drawable.teacher_grayicon);
-//            TeacherImg.setImageResource(R.drawable.teacher_grayicon);
+                selfImg.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.blue)));
+                TeacherImg.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
             }
         });
 
@@ -199,23 +201,23 @@ public class TeacherHomeFragment extends Fragment {
             linearfour.setVisibility(View.GONE);
             cardView6.setVisibility(View.GONE);
             lineartab.setVisibility(View.VISIBLE);
-            imageView1.setImageResource(R.drawable.home_attendance);
+            imageView1.setImageResource(R.drawable.attendance);
             textview1.setText("Attendance");
-            imageView2.setImageResource(R.drawable.home_classes);
+            imageView2.setImageResource(R.drawable.classes_icon);
             textview2.setText("My Classes");
-            imageView3.setImageResource(R.drawable.home_classes);
+            imageView3.setImageResource(R.drawable.leave_icon);
             textview3.setText("Leave");
-            imageView4.setImageResource(R.drawable.e_study);
+            imageView4.setImageResource(R.drawable.ebook);
             textview4.setText("E-Books");
-            imageView5.setImageResource(R.drawable.e_study);
+            imageView5.setImageResource(R.drawable.assignment);
             textview5.setText("Assignments");
 
             selfTxt.setTypeface(Typeface.DEFAULT);
-            selfTxt.setTextColor(context.getResources().getColor(R.color.gray_300));
-            teacherTxt.setTextColor(context.getResources().getColor(R.color.colorGrey));
+            selfTxt.setTextColor(context.getResources().getColor(R.color.blue));
+            teacherTxt.setTextColor(context.getResources().getColor(R.color.black));
 
-//            selfImg.setImageResource(R.drawable.teacher_grayicon);
-//            TeacherImg.setImageResource(R.drawable.teacher_grayicon);
+            selfImg.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.blue)));
+            TeacherImg.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
 
         }
     }
@@ -225,8 +227,6 @@ public class TeacherHomeFragment extends Fragment {
 
         imageViewCurve.setVisibility(View.GONE);
 
-        YoYo.with(Techniques.SlideOutUp)
-                .playOn(linearPrayerAndSaint);
 
         YoYo.with(Techniques.ZoomOut)
                 .playOn(cardView1);

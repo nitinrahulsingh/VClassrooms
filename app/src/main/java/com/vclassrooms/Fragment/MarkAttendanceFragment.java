@@ -108,7 +108,8 @@ public class MarkAttendanceFragment extends Fragment implements DatePickerDialog
         List<MarkAttendanceEnum> markListStudents = new ArrayList<>();
         List<AttendanceDetail> studentlist=((MarkAttendanceAdapter)markAttendanceAdapter).getStudentList();
         MarkAttendanceEnum markAttendanceEnum;
-
+        intPcount=0;
+        intAcount=0;
         for(int i=0;i<studentlist.size();i++){
             markAttendanceEnum=new MarkAttendanceEnum();
             markAttendanceEnum.setAttendance_Source("Android");

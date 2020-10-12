@@ -365,7 +365,7 @@ public class ApplyLeaveBottomSheet extends BottomSheetDialogFragment implements 
     private void getLeaveTypeApi() {
         try {
             appUtils.showProgressbar(context);
-            Call<LeaveTypeResponse> call = ApiService.buildService(context).getLeaveTypeList(strAuth, "select", strSchoolId);
+            Call<LeaveTypeResponse> call = ApiService.buildService(context).getLeaveTypeList(strAuth, "edit", strSchoolId);
             call.enqueue(new Callback<LeaveTypeResponse>() {
                 @Override
                 public void onResponse(Call<LeaveTypeResponse> call, Response<LeaveTypeResponse> response) {

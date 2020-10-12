@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#017dc2</color>
-    <color name="colorPrimaryDark">#017dc2</color>
+    <color name="colorPrimary">#15E4C3</color>
+    <color name="colorPrimaryDark">#15E4C3</color>
     <color name="colorAccent">#D81B60</color>
     <color name="purple">#49006B</color>
     <color name="golden">#D4AF37</color>
@@ -34,6 +34,7 @@
 
     </array>
     <color name="colorGrey">#70999D</color>
+    <color name="whitebg">#F9FDFF</color>
     <color name="gray_100">#f5f5f5</color>
     <color name="gray_200">#eeeeee</color>
     <color name="gray_300">#e0e0e0</color>
@@ -66,6 +67,7 @@
     <color name="deep_orange">#FF5722</color>
     <color name="list_background">#303030</color>
     <color name="light_cyan">#22FDEE</color>
+    <color name="_gray">#EEEEEE</color>
 
 
 

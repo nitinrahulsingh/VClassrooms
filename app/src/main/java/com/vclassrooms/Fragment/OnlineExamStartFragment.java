@@ -1,6 +1,8 @@
 package com.vclassrooms.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -128,7 +131,24 @@ public class OnlineExamStartFragment extends Fragment {
 
         }
     }
+    public  void showAlertDialogOneButton(Context context, String title, String message) {
+        if (!((Activity) context).isFinishing()) {
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle(title);
+            alertDialog.setMessage(message);
 
+            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    OnlineExamFragment onlineExamFragment=new OnlineExamFragment();
+                    appUtils.onAddFragment(getActivity(),onlineExamFragment,R.id.frame_layout);
+
+                }
+            });
+
+            alertDialog.show();
+        }
+    }
     private void onSumbitAns() {
         List<Question> ansList=((OnlineExamStartAdapter)onlineExamAdapter).getSubmitedAns();
         for(int i=0;i<ansList.size();i++) {
@@ -142,7 +162,7 @@ public class OnlineExamStartFragment extends Fragment {
 
         String totalMarksOptain= String.valueOf(appUtils.getIntRoundoffString(String.valueOf(MarksOptain*(Integer.parseInt(TotalMark)/ansList.size()))));
         String strMarksOptaimMsg="You have scored "+totalMarksOptain+" out of"+TotalMark;
-        appUtils.showAlertDialogOneButton(context,"Online Exam",strMarksOptaimMsg);
+       showAlertDialogOneButton(context,"Online Exam",strMarksOptaimMsg);
     }
 
     public void examTimer(int Seconds){

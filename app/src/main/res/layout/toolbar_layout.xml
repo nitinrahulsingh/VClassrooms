@@ -15,6 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/toolBarImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo_vclassroomhome"
+            android:background="@drawable/_ripple" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -80,24 +88,24 @@
                     android:fontFamily="@font/proxima_nova"/>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:visibility="visible"
-                android:id="@+id/e_books_relative"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:focusableInTouchMode="true">
+<!--            <RelativeLayout-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/e_books_relative"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                android:focusableInTouchMode="true">-->
 
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/_ripple"
-                    android:src="@drawable/e_study" />
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/_25sdp"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:layout_marginTop="@dimen/_5sdp"-->
+<!--                    android:background="@drawable/_ripple"-->
+<!--                    android:src="@drawable/e_study" />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         </LinearLayout>
     </RelativeLayout>

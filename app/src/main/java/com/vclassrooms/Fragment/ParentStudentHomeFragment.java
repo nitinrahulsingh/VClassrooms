@@ -109,8 +109,6 @@ public class ParentStudentHomeFragment extends Fragment {
     TextView teacherTxt;
     @BindView(R.id.imageViewCurve)
     ImageView imageViewCurve;
-    @BindView(R.id.linearPrayerAndSaint)
-    LinearLayout linearPrayerAndSaint;
     String strUserTypeID="";
     Fragment currentFragment = null;
     @Nullable
@@ -183,8 +181,6 @@ public class ParentStudentHomeFragment extends Fragment {
 
         imageViewCurve.setVisibility(View.GONE);
 
-        YoYo.with(Techniques.SlideOutUp)
-                .playOn(linearPrayerAndSaint);
 
         YoYo.with(Techniques.ZoomOut)
                 .playOn(cardView1);

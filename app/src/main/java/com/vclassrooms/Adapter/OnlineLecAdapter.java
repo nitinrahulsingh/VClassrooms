@@ -76,10 +76,13 @@ public class OnlineLecAdapter  extends RecyclerView.Adapter<OnlineLecAdapter.Vie
                 viewHolder.main_cardview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String videoUrl = onlineLectureList.get(position).getFilePath();
-                        Intent playVideo = new Intent(Intent.ACTION_VIEW);
-                        playVideo.setDataAndType(Uri.parse(videoUrl), "video/*");
-                        context.startActivity(playVideo);
+                        if(onlineLectureList.get(position).getFilePath()!=null && !TextUtils.isEmpty(onlineLectureList.get(position).getFilePath())){
+                            String videoUrl = onlineLectureList.get(position).getFilePath();
+                            Intent playVideo = new Intent(Intent.ACTION_VIEW);
+                            playVideo.setDataAndType(Uri.parse(videoUrl), "video/*");
+                            context.startActivity(playVideo);
+                        }
+
                     }
                 });
 

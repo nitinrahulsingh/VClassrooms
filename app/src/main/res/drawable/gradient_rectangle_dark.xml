@@ -1,19 +1,21 @@
-
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle" >
-            <solid android:color="@color/btn_color" />
+            <size android:height="100dp"/>
         </shape>
     </item>
-    <item android:bottom="10dp">
-        <shape android:shape="rectangle" >
+    <item
+        android:bottom="-200dp"
+        android:left="-200dp"
+        android:right="-200dp"
+        android:top="0dp"><!--Change this to handle curve-->
+        <shape android:shape="oval">
             <gradient
                 android:angle="270"
-                android:startColor="#2298B3"
-                android:centerColor="#2298B3"
-                android:endColor="@color/btn_color"
-                />
+                android:startColor="@color/light_cyan"
+                android:centerColor="@color/light_cyan"
+                android:endColor="@color/light_cyan" />
         </shape>
     </item>
 </layer-list>

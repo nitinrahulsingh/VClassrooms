@@ -52,6 +52,10 @@ public class StudentHomeFragment extends Fragment {
     CardView cardView7;
     @BindView(R.id.cardView8)
     CardView cardView8;
+    @BindView(R.id.cardView9)
+    CardView cardView9;
+    @BindView(R.id.cardView10)
+    CardView cardView10;
 
     //All Imageview
     @BindView(R.id.imageView1)
@@ -70,6 +74,10 @@ public class StudentHomeFragment extends Fragment {
     ImageView imageView7;
     @BindView(R.id.imageView8)
     ImageView imageView8;
+    @BindView(R.id.imageView9)
+    ImageView imageView9;
+    @BindView(R.id.imageView10)
+    ImageView imageView10;
 
     //All Textview
     @BindView(R.id.textview1)
@@ -88,6 +96,10 @@ public class StudentHomeFragment extends Fragment {
     TextView textview7;
     @BindView(R.id.textview8)
     TextView textview8;
+@BindView(R.id.textview9)
+    TextView textview9;
+@BindView(R.id.textview10)
+    TextView textview10;
 
     @BindView(R.id.linearfour)
     LinearLayout linearfour;
@@ -109,10 +121,9 @@ public class StudentHomeFragment extends Fragment {
     TextView teacherTxt;
     @BindView(R.id.imageViewCurve)
     ImageView imageViewCurve;
-    @BindView(R.id.linearPrayerAndSaint)
-    LinearLayout linearPrayerAndSaint;
     String strUserTypeID="";
     Fragment currentFragment = null;
+    String strModuleName;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -134,22 +145,26 @@ public class StudentHomeFragment extends Fragment {
     private void setAllOption() {
             lineartab.setVisibility(View.GONE);
             linearfour.setVisibility(View.VISIBLE);
-            imageView1.setImageResource(R.drawable.home_attendance);
+            imageView1.setImageResource(R.drawable.attendance);
             textview1.setText("Attendance");
-            imageView2.setImageResource(R.drawable.home_classes);
+            imageView2.setImageResource(R.drawable.classes_icon);
             textview2.setText("My Classes");
-            imageView3.setImageResource(R.drawable.home_classes);
+            imageView3.setImageResource(R.drawable.leave_icon);
             textview3.setText("Leave");
-            imageView4.setImageResource(R.drawable.e_study);
+            imageView4.setImageResource(R.drawable.event_calender);
             textview4.setText("Event Calender");
-            imageView5.setImageResource(R.drawable.e_study);
-            textview5.setText("Online Lec");
-            imageView6.setImageResource(R.drawable.e_study);
+            imageView5.setImageResource(R.drawable.online_lec);
+            textview5.setText("Video Tutorials");
+            imageView6.setImageResource(R.drawable.assignment);
             textview6.setText("Assignments");
-            imageView7.setImageResource(R.drawable.e_study);
+            imageView7.setImageResource(R.drawable.examtimetable);
             textview7.setText("ExamTimetable");
-            imageView8.setImageResource(R.drawable.e_study);
+            imageView8.setImageResource(R.drawable.online_exam);
             textview8.setText("Online Exam");
+             imageView9.setImageResource(R.drawable.video_conference);
+            textview9.setText("Video Conference");
+             imageView10.setImageResource(R.drawable.ebook);
+            textview10.setText("E-Books");
     }
 
 
@@ -157,8 +172,6 @@ public class StudentHomeFragment extends Fragment {
 
         imageViewCurve.setVisibility(View.GONE);
 
-        YoYo.with(Techniques.SlideOutUp)
-                .playOn(linearPrayerAndSaint);
 
         YoYo.with(Techniques.ZoomOut)
                 .playOn(cardView1);
@@ -182,6 +195,10 @@ public class StudentHomeFragment extends Fragment {
                 .playOn(cardView7);
         YoYo.with(Techniques.ZoomOut)
                 .playOn(cardView8);
+        YoYo.with(Techniques.ZoomOut)
+                .playOn(cardView9);
+        YoYo.with(Techniques.ZoomOut)
+                .playOn(cardView10);
 
 
         YoYo.with(Techniques.SlideOutLeft)
@@ -200,6 +217,10 @@ public class StudentHomeFragment extends Fragment {
                 .playOn(cardView7);
         YoYo.with(Techniques.SlideOutRight)
                 .playOn(cardView8);
+        YoYo.with(Techniques.SlideOutRight)
+                .playOn(cardView9);
+        YoYo.with(Techniques.SlideOutRight)
+                .playOn(cardView10);
         //transitionActivityDelay(fragment);
         transitionActivity(fragment);
     }
@@ -225,7 +246,7 @@ public class StudentHomeFragment extends Fragment {
         }, 730);
 
     }
-    @OnClick({R.id.cardView1,R.id.cardView2,R.id.cardView3,R.id.cardView4,R.id.cardView5,R.id.cardView6,R.id.cardView7,R.id.cardView8})
+    @OnClick({R.id.cardView1,R.id.cardView2,R.id.cardView3,R.id.cardView4,R.id.cardView5,R.id.cardView6,R.id.cardView7,R.id.cardView8,R.id.cardView9})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -264,6 +285,14 @@ public class StudentHomeFragment extends Fragment {
             case R.id.cardView8:
                 OnlineExamFragment onlineExamFragment=new OnlineExamFragment();
                 animation(onlineExamFragment);
+                break;
+            case R.id.cardView9:
+                VideoConferenceFragment videoConferenceFragment=new VideoConferenceFragment();
+                animation(videoConferenceFragment);
+                break;
+            case R.id.cardView10:
+                E_BooksFragment e_booksFragment=new E_BooksFragment();
+                animation(e_booksFragment);
                 break;
         }
     }

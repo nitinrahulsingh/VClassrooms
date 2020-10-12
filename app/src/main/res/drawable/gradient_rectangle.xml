@@ -11,8 +11,8 @@
             <gradient
                 android:angle="270"
                 android:startColor="@color/btn_color"
-                android:centerColor="#2298B3"
-                android:endColor="#2298B3"
+                android:centerColor="@color/btn_color"
+                android:endColor="@color/btn_color"
                 />
         </shape>
     </item>

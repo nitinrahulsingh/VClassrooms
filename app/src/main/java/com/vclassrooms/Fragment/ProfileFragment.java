@@ -103,6 +103,7 @@ public class ProfileFragment extends Fragment {
         appUtils=new AppUtils();
         constatnts=new Constatnts();
         init();
+
         return mview;
     }
 

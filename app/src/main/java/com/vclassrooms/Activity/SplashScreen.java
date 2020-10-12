@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -29,12 +30,13 @@ public class SplashScreen extends AppCompatActivity {
     Constatnts constatnts;
     String mobileNumber="";
     Context context;
-
+    FirebaseAnalytics firebaseAnalytics;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        FirebaseApp.initializeApp(this);
+        firebaseAnalytics = FirebaseAnalytics.getInstance(SplashScreen.this);
         try{
             context= SplashScreen.this;
             appUtils=new AppUtils();
@@ -141,7 +143,7 @@ public class SplashScreen extends AppCompatActivity {
                 .setGotoSettingButtonText(getString(R.string.settings))
                 .setPermissions(Manifest.permission.INTERNET,
                         Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.READ_PHONE_STATE,
-                        Manifest.permission.READ_CONTACTS,Manifest.permission.READ_CALL_LOG,Manifest.permission.CALL_PHONE
+                        Manifest.permission.READ_CONTACTS,Manifest.permission.CALL_PHONE
                         ,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.WAKE_LOCK)
                 .check();
 

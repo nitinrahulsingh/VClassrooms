@@ -123,55 +123,55 @@ public class AdminHomeFragment extends Fragment {
     TextView teacherTxt;
     @BindView(R.id.imageViewCurve)
     ImageView imageViewCurve;
-    @BindView(R.id.linearPrayerAndSaint)
-    LinearLayout linearPrayerAndSaint;
-    String strUserTypeID="";
+    String strUserTypeID = "";
     Fragment currentFragment = null;
     Bundle bundle;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mview=inflater.inflate(R.layout.fragment_home,null);
-        ButterKnife.bind(this,mview);
-        context= getActivity();
-        appUtils=new AppUtils();
-        constatnts=new Constatnts();
+        mview = inflater.inflate(R.layout.fragment_home, null);
+        ButterKnife.bind(this, mview);
+        context = getActivity();
+        appUtils = new AppUtils();
+        constatnts = new Constatnts();
         init();
         cardView10.setVisibility(View.GONE);
         return mview;
     }
 
     private void init() {
-        strUserTypeID=appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERTYPEID);
+        strUserTypeID = appUtils.getStringPrefrences(context, constatnts.SH_APPPREF, constatnts.SH_USERTYPEID);
         setAllOption();
+
     }
 
     private void setAllOption() {
-         if(strUserTypeID.contentEquals("5")){
+        if (strUserTypeID.contentEquals("5")) {
             //Admin
-             relself.setVisibility(View.GONE);
-             relTeacher.setVisibility(View.GONE);
-             imageView1.setImageResource(R.drawable.home_attendance);
-             textview1.setText("Attendance");
-            imageView2.setImageResource(R.drawable.home_classes);
+            relself.setVisibility(View.GONE);
+            relTeacher.setVisibility(View.GONE);
+            imageView1.setImageResource(R.drawable.attendance);
+            textview1.setText("Attendance");
+            imageView2.setImageResource(R.drawable.classes_icon);
             textview2.setText("Classes");
-            imageView3.setImageResource(R.drawable.home_classes);
+            imageView3.setImageResource(R.drawable.leave_icon);
             textview3.setText("Leave");
-            imageView4.setImageResource(R.drawable.e_study);
+            imageView4.setImageResource(R.drawable.event_calender);
             textview4.setText("Event Calender");
-            imageView5.setImageResource(R.drawable.e_study);
-            textview5.setText("Online Lec");
-            imageView6.setImageResource(R.drawable.e_study);
+            imageView5.setImageResource(R.drawable.online_lec);
+            textview5.setText("Video Tutorials");
+            imageView6.setImageResource(R.drawable.assignment);
             textview6.setText("Assignments");
-            imageView7.setImageResource(R.drawable.e_study);
+            imageView7.setImageResource(R.drawable.examtimetable);
             textview7.setText("ExamTimetable");
-            imageView8.setImageResource(R.drawable.e_study);
+            imageView8.setImageResource(R.drawable.online_exam);
             textview8.setText("Online Exam");
 
-            imageView9.setImageResource(R.drawable.e_study);
+            imageView9.setImageResource(R.drawable.attendance);
             textview9.setText("Teacher Attendance");
-            imageView10.setImageResource(R.drawable.e_study);
-            textview10.setText("Noticeboard");
+            imageView10.setImageResource(R.drawable.ebook);
+            textview10.setText("E-Book");
 
         }
     }
@@ -181,8 +181,6 @@ public class AdminHomeFragment extends Fragment {
 
         imageViewCurve.setVisibility(View.GONE);
 
-        YoYo.with(Techniques.SlideOutUp)
-                .playOn(linearPrayerAndSaint);
 
         YoYo.with(Techniques.ZoomOut)
                 .playOn(cardView1);
@@ -251,29 +249,30 @@ public class AdminHomeFragment extends Fragment {
                 if (fragment.getClass().getSimpleName().equals(currentFragment + "")) {
 
                 } else {
-                    appUtils.onAddFragment(getActivity(),fragment,R.id.container);
+                    appUtils.onAddFragment(getActivity(), fragment, R.id.container);
                 }
             }
         }, 730);
 
     }
-    @OnClick({R.id.cardView1,R.id.cardView2,R.id.cardView3,R.id.cardView4,R.id.cardView5,R.id.cardView6,R.id.cardView7,R.id.cardView8
-    ,R.id.cardView9,R.id.cardView10})
+
+    @OnClick({R.id.cardView1, R.id.cardView2, R.id.cardView3, R.id.cardView4, R.id.cardView5, R.id.cardView6, R.id.cardView7, R.id.cardView8
+            , R.id.cardView9, R.id.cardView10})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
             case R.id.cardView1:
                 StandardDivisionListFragment fragment = new StandardDivisionListFragment();
-                 bundle=new Bundle();
-                bundle.putString("Module",constatnts.AttendanceModule);
+                bundle = new Bundle();
+                bundle.putString("Module", constatnts.AttendanceModule);
                 fragment.setArguments(bundle);
                 animation(fragment);
                 break;
             case R.id.cardView2:
                 StandardDivisionListFragment standardDivisionListFragment = new StandardDivisionListFragment();
-                 bundle=new Bundle();
-                bundle.putString("Module",constatnts.ClassTimetable);
+                bundle = new Bundle();
+                bundle.putString("Module", constatnts.ClassTimetable);
                 standardDivisionListFragment.setArguments(bundle);
                 animation(standardDivisionListFragment);
                 break;
@@ -287,29 +286,29 @@ public class AdminHomeFragment extends Fragment {
                 break;
             case R.id.cardView5:
                 StandardDivisionListFragment standardDivisionListFragment4 = new StandardDivisionListFragment();
-                bundle=new Bundle();
-                bundle.putString("Module",constatnts.OnlineLec);
+                bundle = new Bundle();
+                bundle.putString("Module", constatnts.OnlineLec);
                 standardDivisionListFragment4.setArguments(bundle);
                 animation(standardDivisionListFragment4);
                 break;
             case R.id.cardView6:
                 StandardDivisionListFragment standardDivisionListFragment1 = new StandardDivisionListFragment();
-                bundle=new Bundle();
-                bundle.putString("Module",constatnts.Assignment);
+                bundle = new Bundle();
+                bundle.putString("Module", constatnts.Assignment);
                 standardDivisionListFragment1.setArguments(bundle);
                 animation(standardDivisionListFragment1);
                 break;
             case R.id.cardView7:
                 StandardDivisionListFragment standardDivisionListFragment2 = new StandardDivisionListFragment();
-                bundle=new Bundle();
-                bundle.putString("Module",constatnts.ExamTimetable);
+                bundle = new Bundle();
+                bundle.putString("Module", constatnts.ExamTimetable);
                 standardDivisionListFragment2.setArguments(bundle);
                 animation(standardDivisionListFragment2);
                 break;
             case R.id.cardView8:
                 StandardDivisionListFragment standardDivisionListFragment3 = new StandardDivisionListFragment();
-                bundle=new Bundle();
-                bundle.putString("Module",constatnts.OnlineExam);
+                bundle = new Bundle();
+                bundle.putString("Module", constatnts.OnlineExam);
                 standardDivisionListFragment3.setArguments(bundle);
                 animation(standardDivisionListFragment3);
                 break;
@@ -318,6 +317,11 @@ public class AdminHomeFragment extends Fragment {
                 animation(teacherListFragment);
                 break;
             case R.id.cardView10:
+                StandardDivisionListFragment standardDivisionListFragment5 = new StandardDivisionListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("Module", constatnts.EBook);
+                standardDivisionListFragment5.setArguments(bundle);
+                animation(standardDivisionListFragment5);
                 break;
         }
     }

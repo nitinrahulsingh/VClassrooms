@@ -19,15 +19,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.vclassrooms.Adapter.ExpandableListAdapter;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
+import com.vclassrooms.Common.FagmentPageOpen;
+import com.vclassrooms.Database.DatabaseHelper;
 import com.vclassrooms.Fragment.AdminHomeFragment;
 import com.vclassrooms.Fragment.AnnouncementFragment;
 import com.vclassrooms.Fragment.ChangePasswordFragment;
 import com.vclassrooms.Fragment.E_BooksFragment;
 import com.vclassrooms.Fragment.GalleryFragment;
+import com.vclassrooms.Fragment.NotificationFragment;
 import com.vclassrooms.Fragment.ParentProfileFragment;
 import com.vclassrooms.Fragment.ParentStudentHomeFragment;
 import com.vclassrooms.Fragment.ProfileFragment;
@@ -45,6 +49,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Rahul on 25,June,2020
@@ -67,10 +72,16 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListView lv_drawer;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer_layout;
-    @BindView(R.id.e_books_relative)
-    RelativeLayout e_books_relative;
+//    @BindView(R.id.e_books_relative)
+//    RelativeLayout e_books_relative;
     @BindView(R.id.toolAnnounce)
     RelativeLayout toolAnnounce;
+    @BindView(R.id.profileimageView)
+    CircleImageView profileimageView;
+    @BindView(R.id.toolMsg)
+    RelativeLayout toolNotification;
+    @BindView(R.id.msgCount)
+    TextView msgCount;
     String strAuth,strRoleid,strUserId,strSchoolId,strAcademicId;
     ActionBarDrawerToggle toggle;
     AppUtils appUtils;
@@ -79,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListAdapter listAdapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-
+    DatabaseHelper databaseHelper;
+    String strModuleName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
             context = MainActivity.this;
             appUtils = new AppUtils();
             constatnts = new Constatnts();
+            strModuleName=getIntent().getStringExtra("Module");
+            if(strModuleName==null){
+                strModuleName="";
+            }
+            databaseHelper = new DatabaseHelper(this);
             strAuth=appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_FCM);
             strRoleid=appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERTYPEID);
             strUserId=appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERID);
@@ -97,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             toolbar.bringToFront();
-           // txtSchoolName.setText(appUtils.getStringPrefrences(MainActivity.this, constatnts.SH_APPPREF, constatnts.SH_SCHOOLNAME));
+            txtSchoolName.setText(appUtils.getStringPrefrences(MainActivity.this, constatnts.SH_APPPREF, constatnts.SH_USERNAME));
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             toggle = new
                     ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,
@@ -109,15 +126,18 @@ public class MainActivity extends AppCompatActivity {
                     };
             drawer.addDrawerListener(toggle);
 
+            ///
+
             toggle.syncState();
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.hamburger_icon);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.hamburger);
 
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
             }
+            appUtils.setImage(profileimageView,context,appUtils.getStringPrefrences(MainActivity.this, constatnts.SH_APPPREF, constatnts.SH_USER_PROFILE_IMAGE));
 
 //            txtName.setText(appUtils.getStringPrefrences(MainActivity.this, constatnts.SH_APPPREF, constatnts.SH_USERFIRSTNAME) + " "
 //                    + appUtils.getStringPrefrences(MainActivity.this, constatnts.SH_APPPREF, constatnts.SH_USERLASTNAME));
@@ -134,43 +154,41 @@ public class MainActivity extends AppCompatActivity {
             ExpandableListviewClicks();
             if(strRoleid.contentEquals("5")){
                 //Admin
-                e_books_relative.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new AdminHomeFragment()).commitAllowingStateLoss();
                 drawer_layout.closeDrawer(GravityCompat.START);
             }else if(strRoleid.contentEquals("3")){
                 //teacher
-                e_books_relative.setVisibility(View.GONE);
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeacherHomeFragment()).commitAllowingStateLoss();
                 drawer_layout.closeDrawer(GravityCompat.START);
             }else if(strRoleid.contentEquals("2")){
                 //Student
-                e_books_relative.setVisibility(View.VISIBLE);
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new StudentHomeFragment()).commitAllowingStateLoss();
                 drawer_layout.closeDrawer(GravityCompat.START);
             }else if(strRoleid.contentEquals("1")){
                 //Parent
-                e_books_relative.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new ParentStudentHomeFragment()).commitAllowingStateLoss();
                 drawer_layout.closeDrawer(GravityCompat.START);
             }
 
-            e_books_relative.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(strRoleid.contentEquals("1")||strRoleid.contentEquals("2")){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new E_BooksFragment()).commitAllowingStateLoss();
-                        drawer_layout.closeDrawer(GravityCompat.START);
-                    }else {
-                        StandardDivisionListFragment standardDivisionListFragment1 = new StandardDivisionListFragment();
-                        Bundle  bundle=new Bundle();
-                        bundle.putString("Module",constatnts.EBook);
-                        standardDivisionListFragment1.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, standardDivisionListFragment1).commitAllowingStateLoss();
-                        drawer_layout.closeDrawer(GravityCompat.START);
-                    }
-
-                }
-            });
+//            e_books_relative.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if(strRoleid.contentEquals("1")||strRoleid.contentEquals("2")){
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new E_BooksFragment()).commitAllowingStateLoss();
+//                        drawer_layout.closeDrawer(GravityCompat.START);
+//                    }else {
+//                        StandardDivisionListFragment standardDivisionListFragment1 = new StandardDivisionListFragment();
+//                        Bundle  bundle=new Bundle();
+//                        bundle.putString("Module",constatnts.EBook);
+//                        standardDivisionListFragment1.setArguments(bundle);
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.container, standardDivisionListFragment1).commitAllowingStateLoss();
+//                        drawer_layout.closeDrawer(GravityCompat.START);
+//                    }
+//
+//                }
+//            });
             toolAnnounce.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -181,6 +199,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.getMessage();
         }
+        toolNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new NotificationFragment()).commitAllowingStateLoss();
+                drawer_layout.closeDrawer(GravityCompat.START);
+            }
+        });
     }
 
     private void prepareListData() {
@@ -224,7 +249,38 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else  if (FagmentPageOpen.isFragmentOpen()) {
+            super.onBackPressed();
+        } else {
 
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.container);
+            if(strRoleid.contentEquals("1")||strRoleid.contentEquals("2")){
+                if (f instanceof StudentHomeFragment)
+                    onTwiceClick();
+                else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new StudentHomeFragment()).commitAllowingStateLoss();
+                }
+            } else if(strRoleid.contentEquals("3")){
+                if (f instanceof TeacherHomeFragment)
+                    onTwiceClick();
+                else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeacherHomeFragment()).commitAllowingStateLoss();
+                }
+            } else{
+                if (f instanceof AdminHomeFragment)
+                    onTwiceClick();
+                else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new AdminHomeFragment()).commitAllowingStateLoss();
+                }
+            }
+
+        }
+    }
     public void onTwiceClick() {
         if (doubleBackToExitPressedOnce) {
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -282,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
                         drawer_layout.closeDrawer(GravityCompat.START);
                     }else if(strRoleid.contentEquals("2")){
                         //Student
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new ParentStudentHomeFragment()).commitAllowingStateLoss();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, new StudentHomeFragment()).commitAllowingStateLoss();
                         drawer_layout.closeDrawer(GravityCompat.START);
                     }else if(strRoleid.contentEquals("1")){
                         //Parent
@@ -342,7 +398,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // Listview on child click listener
         lv_drawer.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -370,7 +425,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 
 }

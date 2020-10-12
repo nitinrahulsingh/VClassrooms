@@ -25,6 +25,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
+import com.vclassrooms.Entity.FCMResponse;
 import com.vclassrooms.Entity.LoginResponse;
 import com.vclassrooms.R;
 import com.vclassrooms.Retrofit.ApiService;
@@ -59,14 +60,13 @@ public class LoginActivity extends AppCompatActivity {
     Context context;
     String strSchoolId="";
     ArrayList<String> myList;
-    FirebaseAnalytics firebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        FirebaseApp.initializeApp(this);
-        firebaseAnalytics = FirebaseAnalytics.getInstance(LoginActivity.this);
+
         context= LoginActivity.this;
         appUtils=new AppUtils();
         constatnts=new Constatnts();
@@ -228,6 +228,8 @@ public class LoginActivity extends AppCompatActivity {
                                         appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getStandardId()),constatnts.SH_STANDARDID);
                                         appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getDivisionId()),constatnts.SH_DIVISIONID);
                                         appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getStudentId()),constatnts.SH_USERID);
+                                        appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getStandardName()),constatnts.SH_STANDARDNAME);
+                                        appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getDivisionName()),constatnts.SH_DIVISIONNAME);
                                     }else if(String.valueOf(response.body().getData().getLoginDetails().get(0).getUserTypeId()).contentEquals("3")){
                                         //Teacher Login
                                         appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getImageURL()),constatnts.SH_USER_PROFILE_IMAGE);
@@ -245,7 +247,8 @@ public class LoginActivity extends AppCompatActivity {
                                     appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getSchoolId()),constatnts.SH_SCHOOLID);
                                     appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getAcademicId()),constatnts.SH_ACADEMICYEAR);
                                     appUtils.setStringPrefrences(context,constatnts.SH_APPPREF, String.valueOf(response.body().getData().getLoginDetails().get(0).getUserName()),constatnts.SH_USERNAME);
-                                    appUtils.simpleIntentFinish(context, MainActivity.class,Bundle.EMPTY);
+
+                                    onFCMInsertApi();
                                 }else {
                                     appUtils.showToast(context, getString(R.string.incorrect_username_password));
                                 }
@@ -263,6 +266,50 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    appUtils.hideProgressbar();
+                    appUtils.showToast(context, getString(R.string.error_message));
+                }
+            });
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    private void onFCMInsertApi() {
+        try {
+            String command="";
+            if(appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERTYPEID).contentEquals("1")||appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERTYPEID).contentEquals("2")){
+                command="updateStudent";
+            }else {
+                command="updateEmployee";
+            }
+            Log.d("Firebase", "token "+ FirebaseInstanceId.getInstance().getToken());
+            appUtils.showProgressbar(context);
+            Call<FCMResponse> call = ApiService.buildService(context).getFCMDetails(constatnts.LICENSEKEY,command,FirebaseInstanceId.getInstance().getToken().toString()
+                    ,appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_USERID),appUtils.getStringPrefrences(context,constatnts.SH_APPPREF,constatnts.SH_SCHOOLID));
+            call.enqueue(new Callback<FCMResponse>() {
+                @Override
+                public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
+                    appUtils.hideProgressbar();
+                    if (response.body() != null) {
+                        if (response.body().getStatusCode().equals(0)) {
+                            if(response.body().getData().getLoginDetails()!=null && response.body().getData().getLoginDetails().size()>0 ){
+                              appUtils.simpleIntentFinish(context, MainActivity.class,Bundle.EMPTY);
+                            }
+                        } else  if (response.body().getStatusCode().equals(1)){
+                            appUtils.showToast(context, getString(R.string.error_message));
+                        }else  if (response.body().getStatusCode().equals(2)){
+                            appUtils.showToast(context, getString(R.string.unauthorize_message));
+                        }
+                    } else {
+                        appUtils.showToast(context, getString(R.string.error_message));
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<FCMResponse> call, Throwable t) {
                     appUtils.hideProgressbar();
                     appUtils.showToast(context, getString(R.string.error_message));
                 }

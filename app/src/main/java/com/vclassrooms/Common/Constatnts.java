@@ -40,11 +40,30 @@ public String Assignment = "Assignment";
 public String OnlineExam = "OnlineExam";
 public String OnlineLec = "OnlineLec";
 public String EBook = "EBook";
+public String Notification = "notification";
 
 ///Role
 public String StudentRole = "2";
 public String ParentRole = "1";
 public String TeacherRole = "3";
 public String AdminRole = "5";
+
+public String Read = "1";
+public String Unread = "0";
+
+
+    public String Title_Announcement = "Announcement";
+    public String Title_EBook = "EBook";
+    public String Title_Gallery = "Gallery";
+    public String Title_Assignment = "Assignment";
+    public String  Title_OnlineLecture = "OnlineLecture";
+    public String  Title_OnlineExamination = "OnlineExamination";
+    public String  Title_Attendance = "Attendance";
+    public String  Title_Leave = "Leave";
+
+    public String  NotificationFlag = "notificationflag";
+    public String  AnnouncementFlag = "announcementflag";
+
+public String VCLASSROOMS3RDC = "5";
 
 }

@@ -110,7 +110,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView imageViewArrow = (ImageView) convertView.findViewById(R.id.imageViewArrow);
 
         if (headerTitle.contentEquals(context.getString(R.string.Home))) {
-            imageView.setImageResource(R.drawable.logo);
+            imageView.setImageResource(R.drawable.home);
         } else if (headerTitle.contentEquals(context.getString(R.string.Profile))) {
             imageView.setImageResource(R.drawable.profile);
 
@@ -119,14 +119,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             imageViewArrow.setImageResource(R.drawable.setting);
             //Direcotory check
         } else if (headerTitle.contentEquals(context.getString(R.string.directory))){
-                imageView.setImageResource(R.drawable.directories1);
+                imageView.setImageResource(R.drawable.directory);
         } else if (headerTitle.contentEquals(context.getString(R.string.Logout))) {
             imageView.setImageResource(R.drawable.logout);
         }
         else if (headerTitle.contentEquals(context.getString(R.string.dashboard))) {
             imageView.setImageResource(R.drawable.logout);
         }else if (headerTitle.contentEquals(context.getString(R.string.gallery))) {
-            imageView.setImageResource(R.drawable.setting);
+            imageView.setImageResource(R.drawable.gallery);
         }
 
 

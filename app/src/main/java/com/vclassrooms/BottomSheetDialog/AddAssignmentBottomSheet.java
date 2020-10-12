@@ -35,6 +35,7 @@ import com.vclassrooms.Adapter.AttendanceStandardListAdapter;
 import com.vclassrooms.Adapter.StdListBottomAdapter;
 import com.vclassrooms.Common.AppUtils;
 import com.vclassrooms.Common.Constatnts;
+import com.vclassrooms.Entity.AssignmentInsertResponse;
 import com.vclassrooms.Entity.CommonSuccessResponse;
 import com.vclassrooms.Entity.StandardDivisionResponse;
 import com.vclassrooms.Entity.SubjectDetailsResponse;
@@ -91,6 +92,7 @@ public class AddAssignmentBottomSheet extends BottomSheetDialogFragment {
     List<SubjectDetailsResponse.Subject> subjectList = new ArrayList<>();
     String strStandardId,strSubjectId,strDivisionId;
     CommonInterface commonInterface;
+    String strMediaId;
     public AddAssignmentBottomSheet newInstance(Fragment fragment) {
         commonInterface = (CommonInterface) fragment;
         return new AddAssignmentBottomSheet();
@@ -230,17 +232,17 @@ public class AddAssignmentBottomSheet extends BottomSheetDialogFragment {
 
 
     }
-    private void onUploadImageApi() {
+    private void onUploadAllImageApi(String mediaId) {
         List<MultipartBody.Part> parts = new ArrayList<>();
-        if (uploadImageDetailslist != null && uploadImageDetailslist.size()>0) {
+        if (uploadImageDetailslist != null) {
+            // create part for file (photo, video, ...)
             for (int i = 0; i < uploadImageDetailslist.size(); i++) {
                 parts.add(prepareFilePart(uploadImageDetailslist.get(i).getImageName(), Uri.parse(uploadImageDetailslist.get(i).getFilePath()),i));
             }
         }
         try {
             appUtils.showProgressbar(context);
-            Call<CommonSuccessResponse> call = ApiService.buildService(context).onUploadAssignmentDetails(strAuth,parts,"Insert",strStandardId,strDivisionId,
-                    strSubjectId,strUserId,et_tittle.getText().toString(),et_comment.getText().toString(),strAcademicId,strSchoolId,strUserId);
+            Call<CommonSuccessResponse> call = ApiService.buildService(context).onUploadImages(strAuth,parts,"insert",strSchoolId,strAcademicId,strUserId,"2",mediaId);
             call.enqueue(new Callback<CommonSuccessResponse>() {
                 @Override
                 public void onResponse(Call<CommonSuccessResponse> call, Response<CommonSuccessResponse> response) {
@@ -264,6 +266,47 @@ public class AddAssignmentBottomSheet extends BottomSheetDialogFragment {
 
                 @Override
                 public void onFailure(Call<CommonSuccessResponse> call, Throwable t) {
+                    appUtils.hideProgressbar();
+                    appUtils.showToast(context, getString(R.string.error_message));
+                }
+            });
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    private void onUploadImageApi() {
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        if (uploadImageDetailslist != null && uploadImageDetailslist.size()>0) {
+            for (int i = 0; i < uploadImageDetailslist.size(); i++) {
+                parts.add(prepareFilePart(uploadImageDetailslist.get(i).getImageName(), Uri.parse(uploadImageDetailslist.get(i).getFilePath()),i));
+            }
+        }
+        try {
+            appUtils.showProgressbar(context);
+            Call<AssignmentInsertResponse> call = ApiService.buildService(context).onUploadAssignmentDetails(strAuth,"Insert",strStandardId,strDivisionId,
+                    strSubjectId,strUserId,et_tittle.getText().toString(),et_comment.getText().toString(),strAcademicId,strSchoolId,strUserId);
+            call.enqueue(new Callback<AssignmentInsertResponse>() {
+                @Override
+                public void onResponse(Call<AssignmentInsertResponse> call, Response<AssignmentInsertResponse> response) {
+                    appUtils.hideProgressbar();
+                    if (response.code() == 401) {
+                    } else {
+                        if (response.body() != null) {
+                            if (response.body().getStatusCode().equals(0)) {
+                                strMediaId=response.body().getData().getAssignmentDetails().get(0).getColumn1();
+                                onUploadAllImageApi(response.body().getData().getAssignmentDetails().get(0).getColumn1());
+                            } else {
+                                appUtils.showToast(context, getString(R.string.error_message));
+                            }
+                        } else {
+                            appUtils.showToast(context, getString(R.string.error_message));
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<AssignmentInsertResponse> call, Throwable t) {
                     appUtils.hideProgressbar();
                     appUtils.showToast(context, getString(R.string.error_message));
                 }

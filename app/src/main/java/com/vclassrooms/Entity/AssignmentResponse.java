@@ -35,6 +35,25 @@ public class AssignmentResponse {
     {
         private int Subject_Id;
 
+        public int getAssignment_Id() {
+            return Assignment_Id;
+        }
+
+        public void setAssignment_Id(int assignment_Id) {
+            Assignment_Id = assignment_Id;
+        }
+
+        public String getInsertedDate() {
+            return InsertedDate;
+        }
+
+        public void setInsertedDate(String insertedDate) {
+            InsertedDate = insertedDate;
+        }
+
+        private int Assignment_Id;
+        private String InsertedDate;
+
         private int Standard_Id;
 
         private int Division_Id;

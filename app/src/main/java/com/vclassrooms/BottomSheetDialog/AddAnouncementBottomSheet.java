@@ -260,7 +260,7 @@ public class AddAnouncementBottomSheet extends BottomSheetDialogFragment impleme
                         if (response.body().getStatusCode().equals(0)) {
 
                             commonInterface.OnCommonInterfaceClick(0,true);
-                                    appUtils.showToast(context, getString(R.string.leave_apply_successfully));
+                                    appUtils.showToast(context, "Announcement added successfully");
                                     dismiss();
 
 

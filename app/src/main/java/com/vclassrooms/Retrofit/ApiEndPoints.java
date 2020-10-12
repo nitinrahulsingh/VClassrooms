@@ -8,12 +8,14 @@ import com.vclassrooms.Entity.AddOnlineLecResponse;
 import com.vclassrooms.Entity.AnnouncementDetailResponse;
 import com.vclassrooms.Entity.AnnouncementEnum;
 import com.vclassrooms.Entity.ApplyLeaveResponse;
+import com.vclassrooms.Entity.AssignmentInsertResponse;
 import com.vclassrooms.Entity.AssignmentResponse;
 import com.vclassrooms.Entity.ChangePasswordRequest;
 import com.vclassrooms.Entity.ClasTimeTableResponse;
 import com.vclassrooms.Entity.CommonSuccessResponse;
 import com.vclassrooms.Entity.EbookDetailsResponse;
 import com.vclassrooms.Entity.ExamTimeTableResponse;
+import com.vclassrooms.Entity.FCMResponse;
 import com.vclassrooms.Entity.GalleryDetailResponse;
 import com.vclassrooms.Entity.HolidayDetailResponse;
 import com.vclassrooms.Entity.LeaveDeatailsResponse;
@@ -61,6 +63,15 @@ public interface ApiEndPoints {
             @Query("vchPassword") String vchPassword,
             @Query("intSchool_id") String intSchool_id,
             @Query("FCMToken") String FCMToken
+    );
+    //FCM Details
+    @GET("Login")
+    Call<FCMResponse> getFCMDetails(
+            @Header("Authorization") String Authorization,
+            @Query("command") String command,
+            @Query("FCMtoken") String vchUser_name,
+            @Query("User_Id") String vchPassword,
+            @Query("intSchool_id") String intSchool_id
     );
 
     //School Details
@@ -332,7 +343,7 @@ public interface ApiEndPoints {
             @Query("intschool_id") String intschool_id,
             @Query("intAcademic_id") String intAcademic_id,
             @Query("intStandard_id") String intStandard_id,
-            @Query("DivisionId") String DivisionId,
+            @Query("Division_Id") String DivisionId,
             @Query("Role_id") String Role_id,
             @Query("intUser_id") String intUser_id
     );
@@ -401,11 +412,10 @@ public interface ApiEndPoints {
     );
 
 
-    @Multipart
     @POST("Assignment")
-    Call<CommonSuccessResponse> onUploadAssignmentDetails(
+    Call<AssignmentInsertResponse> onUploadAssignmentDetails(
             @Header("Authorization") String Authorization,
-            @Part List<MultipartBody.Part> files,
+           // @Part List<MultipartBody.Part> files,
             @Query("command") String command,
             @Query("Standard_Id") String Standard_Id,
             @Query("Division_Id") String Division_Id,

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -66,7 +67,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
             @Override
             public void run() {
                 appUtils.setText(viewHolde.txtTitle,assignmentList.get(position).getAssignment_Name());
-                appUtils.setText(viewHolde.txtDate,assignmentList.get(position).getDtDate());
+                appUtils.setText(viewHolde.txtDate,appUtils.convertDateFormat("yyyy-MM-dd'T'HH:mm:ss","dd/MM/yyyy",assignmentList.get(position).getInsertedDate()));
                 appUtils.setText(viewHolde.subject_tv,assignmentList.get(position).getSubjectName());
 
 
@@ -95,13 +96,16 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle,txtDate,subject_tv;
-        CardView cardPreview;
+        CardView cardPreview,card_photo;
+        ImageView ivPhoto1;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle=(TextView)itemView.findViewById(R.id.txtTitle);
             txtDate=(TextView)itemView.findViewById(R.id.txtDate);
             subject_tv = (TextView)itemView.findViewById(R.id.subject_tv);
             cardPreview = (CardView) itemView.findViewById(R.id.cardPreview);
+            card_photo = (CardView) itemView.findViewById(R.id.card_photo);
+            ivPhoto1 = (ImageView) itemView.findViewById(R.id.ivPhoto1);
 
 
         }

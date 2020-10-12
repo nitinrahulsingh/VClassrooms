@@ -65,7 +65,7 @@
                 android:paddingRight="30.0dip"
                 android:paddingTop="5.0dip"
                 android:text="@string/text_button_done"
-                android:textColor="#ffffffff"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
         </FrameLayout>
 
